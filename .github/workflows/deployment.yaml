@@ -93,15 +93,15 @@ jobs:
 
         - name: Deploy nginx chart
           run: |
-            helm install nginx ingress-nginx/ingress-nginx \
+            helm template nginx ingress-nginx/ingress-nginx \
             --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }} | kubectl apply -f -
 
         - name: Deploy Letsencrypt CA issuer
-          run: kubectl apply -f manifest/issuer.yaml -n ${{ env.NAMESPACE }} | kubectl apply -f -
+          run: kubectl apply -f manifest/issuer.yaml -n ${{ env.NAMESPACE }} 
 
         - name: Deploy Rasa X
           run: |
-            helm install rasa-x rasa-x/rasa-x \
+            helm template rasa-x rasa-x/rasa-x \
             --namespace ${{ env.NAMESPACE }} \
             --values ./manifest/rasa.values.yaml | kubectl apply -f -
 #            --values ./manifest/prod/rasa.values.yaml \
