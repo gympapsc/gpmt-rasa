@@ -102,7 +102,7 @@ jobs:
         - name: Deploy Rasa X
           run: |
             helm install rasa-x rasa-x/rasa-x \
-            --namespace ${{ env.NAMESPACE }}
+            --namespace ${{ env.NAMESPACE }} \
             --values ./manifest/rasa.values.yaml \
             --values ./manifest/prod/rasa.values.yaml \
             --set rasax.initialUser.password=${{ secrets.RASA_X_PASSWORD }} \
