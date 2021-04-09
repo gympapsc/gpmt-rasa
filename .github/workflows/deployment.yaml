@@ -94,16 +94,16 @@ jobs:
         - name: Deploy nginx chart
           run: |
             helm install nginx ingress-nginx/ingress-nginx \
-            --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }}
+            --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }} | kubectl apply -f -
 
         - name: Deploy Letsencrypt CA issuer
-          run: kubectl apply -f manifest/issuer.yaml -n ${{ env.NAMESPACE }}
+          run: kubectl apply -f manifest/issuer.yaml -n ${{ env.NAMESPACE }} | kubectl apply -f -
 
         - name: Deploy Rasa X
           run: |
             helm install rasa-x rasa-x/rasa-x \
             --namespace ${{ env.NAMESPACE }} \
-            --values ./manifest/rasa.values.yaml \
+            --values ./manifest/rasa.values.yaml | kubectl apply -f -
 #            --values ./manifest/prod/rasa.values.yaml \
 #            --set rasax.initialUser.password=${{ secrets.RASA_X_PASSWORD }} \
 #            --set rabbitmq.rabbitmq.password=${{ secrets.RABBITMQ_PASSWORD }} \
