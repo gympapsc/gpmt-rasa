@@ -103,7 +103,7 @@ jobs:
           run: |
             helm template rasa-x rasa-x/rasa-x \
             --namespace ${{ env.NAMESPACE }} \
-            --values ./manifest/rasa.values.yaml | kubectl apply -f -
+            --values ./manifest/rasa.values.yaml | kubectl apply -n ${{ env.NAMESPACE }} -f -
 #            --values ./manifest/prod/rasa.values.yaml \
 #            --set rasax.initialUser.password=${{ secrets.RASA_X_PASSWORD }} \
 #            --set rabbitmq.rabbitmq.password=${{ secrets.RABBITMQ_PASSWORD }} \
