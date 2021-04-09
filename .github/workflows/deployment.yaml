@@ -87,8 +87,8 @@ jobs:
         
         - name: Fetch helm repos             
           run: |
-            helm repo add ingress-nginx
-            helm repo add rasa-x
+            helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+            helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
             helm repo update
 
         - name: Deploy nginx chart
@@ -105,10 +105,10 @@ jobs:
             --namespace ${{ env.NAMESPACE }}
             --values ./manifest/rasa.values.yaml \
             --values ./manifest/prod/rasa.values.yaml \
-            --set rasax.initialUser.password ${{ secrets.RASA_X_PASSWORD }} \
-            --set rabbitmq.rabbitmq.password ${{ secrets.RABBITMQ_PASSWORD }} \
-            --set global.postgresql.postgresqlPassword ${{ secrets.TRACKER_DB_PASSWORD }} \
-            --set global.redis.password ${{ secrets.REDIS_PASSWORD }} \
-            --set images.imagePullSecrets[0].name ${{ env.REGISTRY_SECRET_NAME }} \
+            --set rasax.initialUser.password=${{ secrets.RASA_X_PASSWORD }} \
+            --set rabbitmq.rabbitmq.password=${{ secrets.RABBITMQ_PASSWORD }} \
+            --set global.postgresql.postgresqlPassword=${{ secrets.TRACKER_DB_PASSWORD }} \
+            --set global.redis.password=${{ secrets.REDIS_PASSWORD }} \
+            --set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }} \
             --wait
 
