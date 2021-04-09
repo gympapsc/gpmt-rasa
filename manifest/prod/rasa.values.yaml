@@ -1,0 +1,17 @@
+ingres:
+    hosts:
+    - host: rasa-gpmt.northeurope.cloudapp.azure.com
+      paths:
+      - /
+    
+    tls:
+    - secretName: rasa-x-tls
+      hosts:
+      - rasa-gpmt.northeurope.cloudapp.azure.com
+
+    annotations:
+        kubernetes.io/ingress.class: nginx
+        kubenetes.io/tls-acme: "true"
+
+
+

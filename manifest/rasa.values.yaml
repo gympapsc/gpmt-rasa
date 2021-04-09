@@ -1,0 +1,19 @@
+rasax:
+    initialUser:
+        username: "gpmt"
+
+rasa:
+    version: "2.3.0"
+
+    additionalChannelCredentials:
+        rest:
+
+app:
+    name: "gpmtregistry.azurecr.io/gpmt-rasa-actions"
+    tag: "v1"
+
+nginx:
+    enabled: false
+
+
+

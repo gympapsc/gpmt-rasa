@@ -1,0 +1,33 @@
+on:
+    pull_request:
+        types: [assigned, opened, synchronize, reopened]
+
+name: Rasa train and test
+
+jobs:
+    train-test:
+        name: Train and test rasa
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Rasa train and test
+          uses: RasaHQ/rasa-train-test-gha@main
+          with:
+            rasa_version: '2.3.0-full'
+            cross_validation: true
+            test_type: all
+            publish_summary: true
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+        - name: Upload report
+          uses: actions/upload-artifact@master
+          with:
+            name: rasa-results
+            path: |
+                results
+                reports
+        - name: Upload model
+          uses: actions/upload-artifact@master
+          with:
+            name: rasa-model
+            path: models
+        
