@@ -111,6 +111,5 @@ jobs:
             --set rabbitmq.rabbitmq.password=${{ secrets.RABBITMQ_PASSWORD }} \
             --set global.postgresql.postgresqlPassword=${{ secrets.TRACKER_DB_PASSWORD }} \
             --set global.redis.password=${{ secrets.REDIS_PASSWORD }} \
-            --set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }} \
-            --wait
+            --set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }}
 
