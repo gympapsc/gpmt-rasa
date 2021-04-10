@@ -1,6 +1,7 @@
 rasax:
     initialUser:
         username: "gpmt"
+        password: "gympap?password"
 
 rasa:
     version: "2.3.0"
