@@ -89,6 +89,7 @@ jobs:
           run: |
             helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
             helm repo add rasa-x https://rasahq.github.io/rasa-x-helm
+            helm repo add jetstack https://charts.jetstack.io
             helm repo update
 
         - name: Deploy nginx chart
