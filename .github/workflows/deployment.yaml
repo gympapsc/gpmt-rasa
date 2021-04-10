@@ -96,6 +96,13 @@ jobs:
             helm upgrade nginx-ingress ingress-nginx/ingress-nginx \
             --install \
             --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }}
+        
+        - name: Deploy certificate manager
+          run: |
+            helm upgrade --install cert-manager jetstack/cert-manager \
+            --values ./manifest/cert-manager.values.yaml \
+            --set installCRDs=true \
+            --namespace cert-manager --create-namespace 
 
         - name: Deploy Letsencrypt CA issuer
           run: kubectl apply -f manifest/issuer.yaml -n ${{ env.NAMESPACE }} 
@@ -107,9 +114,9 @@ jobs:
             --namespace ${{ env.NAMESPACE }} \
             --values ./manifest/rasa.values.yaml \
             --values ./manifest/prod/rasa.values.yaml \
-            --set rasax.initialUser.password="${{ secrets.RASA_X_PASSWORD }}" \
-            --set rabbitmq.rabbitmq.password="${{ secrets.RABBITMQ_PASSWORD }}" \
-            --set global.postgresql.postgresqlPassword="${{ secrets.TRACKER_DB_PASSWORD }}" \
-            --set global.redis.password="${{ secrets.REDIS_PASSWORD }}" \
-            --set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }}
+            --set rasax.initialUser.password="${{ secrets.RASA_X_PASSWORD }}" 
+            #--set rabbitmq.rabbitmq.password="${{ secrets.RABBITMQ_PASSWORD }}" \
+            #--set global.postgresql.postgresqlPassword="${{ secrets.TRACKER_DB_PASSWORD }}" \
+            #--set global.redis.password="${{ secrets.REDIS_PASSWORD }}" \
+            #--set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }}
 
