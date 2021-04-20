@@ -96,7 +96,7 @@ jobs:
           run: |
             helm upgrade nginx-ingress ingress-nginx/ingress-nginx \
             --install \
-            --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }}
+            --values ./manifest/prod/nginx.values.yaml -n ${{ env.NAMESPACE }}
         
         - name: Deploy certificate manager
           run: |
