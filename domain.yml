@@ -3,37 +3,71 @@ version: "2.0"
 intents:
   - greet
   - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
   - add_micturition
+  - deny
+  - affirm
+  - fill_micturition_time
+  - add_drinking
+  - fill_drinking_time
+  - fill_drinking_amount
 
 actions:
   - action_add_micturition
-  - action_hello_world
+  - action_add_drinking
 
 responses:
   utter_greet:
   - text: "Hey, Wie geht's dir?"
 
-  utter_cheer_up:
-  - text: "Hier ist was zum Aufmuntern:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
   utter_did_that_help:
   - text: "Hilft dir das weiter?"
-
-  utter_happy:
-  - text: "Alles klar!"
-  - text: "Klasse"
 
   utter_goodbye:
   - text: "Tschüss"
 
   utter_iamabot:
-  - text: "Ich bin ein Rasa Bot"
+  - text: "Ich bin deine Hilfe"
+
+  utter_confirm:
+  - text: "Hab's eingetragen"
+  - text: "Ist gespeichert"
+  - text: "Alles klar!"
+
+  utter_ask_form_add_micturition_time:
+  - text: "Wann warst du auf Toilette?"
+
+  utter_ask_form_add_drinking_time:
+  - text: "Wann genau hast du Etwas getrunken?"
+
+  utter_ask_form_add_drinking_amount:
+  - text: "Und wie viel?"
+
+entities:
+  - time
+  - quantity
+  - volume
+
+slots:
+  time:
+    type: text
+  amount:
+    type: any
+
+forms:
+  form_add_micturition:
+    time:
+      - type: from_entity
+        entity: time
+  
+  form_add_drinking:
+    time:
+      - type: from_entity
+        entity: time
+    amount:
+      - type: from_entity
+        entity: volume
+
+
 
 session_config:
   session_expiration_time: 60

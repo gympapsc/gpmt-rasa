@@ -45,39 +45,32 @@ nlu:
     - auf keinen fall
     - nicht wirklich
 
-- intent: mood_great
-  examples: |
-    - perfekt
-    - klasse
-    - stark
-    - fühl mich klasse
-    - wunderbar
-    - Ich bin klasse
-    - extrem gut
-    - sehr sehr gut
-    - richtig klasse
-    - weiter so
-    - mein tag war gut
-
-- intent: mood_unhappy
-  examples: |
-    - mein tag war schlecht
-    - ich fühle mich schlecht
-    - ich glaube ich fühle mich schlecht
-    - ich bin enttäuscht
-    - ich bin traurig
-    - schade
-    - sehr traurig
-    - nicht toll
-
-- intent: bot_challenge
-  examples: |
-    - bist du ein Mensch?
-    - bist du eine Maschine?
-    - Mit wem spreche ich?
-    - Wer bist du?
-
-
 - intent: add_micturition
   examples: |
     - Ich war auf Toilette
+    - Ich habe aus getretten
+    - Miktionseintrag
+    - Miktion
+    - Mache einen Miktionseintrag
+    - Ich habe gepinkelt
+    - Ich war um [](time) auf Toilette
+
+- intent: add_drinking
+  examples: |
+    - Ich habe etwas getrunken
+    - Trinkeintrag
+    - Wasser
+    - Kaffee
+
+
+- intent: fill_micturition_time
+  examples: |
+    - Ich war um [](time) auf Toilette
+    - Um [](time) war meine Miktion
+    - [](time)
+
+- intent: fill_drinking_time
+  examples: |
+    - Ich habe ungefähr [](amount) getrunken
+    - So etwa [](amount)
+    - [](amount)
