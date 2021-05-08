@@ -1,56 +1,56 @@
-on: [release, push]
+# on: [release, push]
 
-env:
-    REGISTRY_NAME: gpmtregistry
-    CLUSTER_NAME: GPMTCluster
-    NAMESPACE: rasa
-    REGISTRY_SECRET_NAME: registry-token
-    VERSION: v1
-    CLUSTER_RESOURCE_GROUP: GPMTGroup
+# env:
+#     REGISTRY_NAME: gpmtregistry
+#     CLUSTER_NAME: GPMTCluster
+#     NAMESPACE: rasa
+#     REGISTRY_SECRET_NAME: registry-token
+#     VERSION: v1
+#     CLUSTER_RESOURCE_GROUP: GPMTGroup
 
-name: Deployment to AKS
+# name: Deployment to AKS
 
-jobs:
-    build:
-        runs-on: ubuntu-latest
-        name: Build action container
-        steps:
-        - uses: actions/checkout@v2
-        - name: ACR login
-          uses: azure/docker-login@v1
-          with:
-            login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
-            username: ${{ secrets.ACR_ID }}
-            password: ${{ secrets.ACR_CREDENTIALS }}
+# jobs:
+    # build:
+    #     runs-on: ubuntu-latest
+    #     name: Build action container
+    #     steps:
+    #     - uses: actions/checkout@v2
+    #     - name: ACR login
+    #       uses: azure/docker-login@v1
+    #       with:
+    #         login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
+    #         username: ${{ secrets.ACR_ID }}
+    #         password: ${{ secrets.ACR_CREDENTIALS }}
             
-        - name: rasa action container build
-          run: docker build ./actions -t ${{ env.REGISTRY_NAME }}.azurecr.io/gpmt-rasa-actions:${{ env.VERSION }}
+    #     - name: rasa action container build
+    #       run: docker build ./actions -t ${{ env.REGISTRY_NAME }}.azurecr.io/gpmt-rasa-actions:${{ env.VERSION }}
         
-        - name: rasa action container push
-          run: docker push ${{ env.REGISTRY_NAME }}.azurecr.io/gpmt-rasa-actions:${{ env.VERSION }}
+    #     - name: rasa action container push
+    #       run: docker push ${{ env.REGISTRY_NAME }}.azurecr.io/gpmt-rasa-actions:${{ env.VERSION }}
     
-    train-test:
-        name: Train and test rasa bot
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - name: Rasa train and test
-          uses: RasaHQ/rasa-train-test-gha@main
-          with:
-            rasa_version: "2.3.0-full"
-            data_validate: true
-            rasa_train: true
-            cross_validation: true
-            rasa_test: true
-            publish_summary: true
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-        - name: Upload model
-          if: github.ref == 'refs/heads/main'
-          uses: actions/upload-artifact@master
-          with:
-            name: model
-            path: models
+    # train-test:
+    #     name: Train and test rasa bot
+    #     needs: build
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #     - uses: actions/checkout@v2
+    #     - name: Rasa train and test
+    #       uses: RasaHQ/rasa-train-test-gha@main
+    #       with:
+    #         rasa_version: "2.3.0-full"
+    #         data_validate: true
+    #         rasa_train: true
+    #         cross_validation: true
+    #         rasa_test: true
+    #         publish_summary: true
+    #         github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     - name: Upload model
+    #       if: github.ref == 'refs/heads/main'
+    #       uses: actions/upload-artifact@master
+    #       with:
+    #         name: model
+    #         path: models
         #- name: Upload model to Rasa X
         #  run: curl -k -F "model=@my_model.tar.gz" "https://rasa-gpmt.northeurope.cloudapp.azure.com/api/projects/default/models?api_token=4f5e1d0b08cf891ddd8d0be548cd6543bad572c3"
 
