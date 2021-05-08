@@ -44,7 +44,6 @@ responses:
 
 entities:
   - time
-  - quantity
   - volume
 
 slots:

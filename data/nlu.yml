@@ -61,6 +61,8 @@ nlu:
     - Trinkeintrag
     - Wasser
     - Kaffee
+    - Ich habe [](time) [](volume) Wasser getrunken
+    - [](volume) Wasser um [](time) getrunken
 
 
 - intent: fill_micturition_time
@@ -71,6 +73,12 @@ nlu:
 
 - intent: fill_drinking_time
   examples: |
-    - Ich habe ungefähr [](amount) getrunken
-    - So etwa [](amount)
-    - [](amount)
+    - Ich habe das letzte mal [](time) Etwas getrunken
+    - [](time)
+    - So gegen [](time)
+
+- intent: fill_drinking_amount
+  examples: |
+    - Ich habe ungefähr [](volume) getrunken
+    - So etwa [](volume)
+    - [](volume)
