@@ -5,8 +5,8 @@ rules:
     - intent: greet
     - action: utter_greet
     - action: utter_questionnaire_start
-    - action: form_questionaire
-    - active_loop: form_questionaire
+    - action: form_questionnaire
+    - active_loop: form_questionnaire
     - active_loop: null
     - slot_was_set:
       - requested_slot: null
