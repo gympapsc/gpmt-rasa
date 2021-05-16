@@ -2,12 +2,27 @@ version: "2.0"
 
 rules:
 
+- rule:
+  - rule: Start questionnaire
+    conversation_start: true
+    condition:
+      - slot_was_set:
+        - questionnaire: false
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_questionnaire_start
+      - action: action_questionnaire
+
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
 
 - rule: Add micturition entry
+  condition:
+    - slot_was_set:
+      - questionnaire: false
   steps:
   - intent: add_micturition
   - action: form_add_micturition
@@ -21,6 +36,9 @@ rules:
     - time: null
 
 - rule: Add drinking entry
+  condition:
+    - slot_was_set:
+      - questionnaire: false
   steps:
   - intent: add_drinking
   - action: form_add_drinking
@@ -34,3 +52,15 @@ rules:
   - slot_was_set:
     - time: null
     - amount: null
+
+- rule: Questionnaire disease
+  condition:
+    - slot_was_set:
+      - questionnaire: true
+    - active_loop: form_disease
+  steps:
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+      - answer
+    - action: action_questionnaire

@@ -82,3 +82,8 @@ nlu:
     - Ich habe ungefähr [](volume) getrunken
     - So etwa [](volume)
     - [](volume)
+
+- intent: fill_disease
+  examples: |
+    - Ich leide unter [muliples sklerose](disease)
+    - Ich leide unter [ms](disease)

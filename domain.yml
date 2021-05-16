@@ -14,10 +14,14 @@ intents:
 actions:
   - action_add_micturition
   - action_add_drinking
+  - action_questionnaire
 
 responses:
   utter_greet:
-  - text: "Hey, Wie geht's dir?"
+  - text: "Hallo ich bin dein chatbot"
+
+  utter_questionnaire_start:
+  - text: "Ich möchte dir ein paar Fragen stellen."
 
   utter_did_that_help:
   - text: "Hilft dir das weiter?"
@@ -42,15 +46,30 @@ responses:
   utter_ask_form_add_drinking_amount:
   - text: "Und wie viel?"
 
+  utter_ask_form_disease_disease:
+  - text: "Unter welcher Krankheit leidest du?"
+
+  utter_questionnaire_finished:
+  - text: "Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen."
+
+
 entities:
   - time
   - volume
+  - disease
 
 slots:
   time:
     type: text
   amount:
     type: any
+
+  questionnaire:
+    type: bool
+    influence_conversation: true
+  answer:
+    type: any
+  
 
 forms:
   form_add_micturition:
@@ -66,6 +85,10 @@ forms:
       - type: from_entity
         entity: volume
 
+  form_disease:
+    answer:
+      - type: from_entity
+        entity: disease
 
 
 session_config:

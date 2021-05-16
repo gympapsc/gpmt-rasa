@@ -3,13 +3,14 @@ from datetime import datetime
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
-from rasa_sdk.events import SlotSet, AllSlotsReset
+from rasa_sdk.events import FollowupAction, SlotSet, AllSlotsReset
 from rasa_sdk.executor import CollectingDispatcher
 
-from .store import Store
+from actions.store import Store
+
+from actions.questionnaire import ActionQuestionnaire
 
 store = Store()
-
 
 class ActionAddMicturition(Action):
     
@@ -22,7 +23,8 @@ class ActionAddMicturition(Action):
         tracker: Tracker,
         domain: Dict[Text, Any]
     ):
-        date = datetime.fromisoformat(tracker.get_slot("time"))
+        date = tracker.get_slot("time")
+        print(date)
         store.create_micturition(tracker.sender_id, date)
 
         dispatcher.utter_message(response="utter_confirm")
@@ -39,8 +41,13 @@ class ActionAddDrinking(Action):
         tracker: Tracker,
         domain: Dict[Text, Any]
     ):
-        date = datetime.fromisoformat(tracker.get_slot("time"))
-        store.create_drinking(tracker.sender_id, date, "")
+        date = tracker.get_slot("time")
+        amount = tracker.get_slot("amount")
+        store.create_drinking(tracker.sender_id, date, amount)
 
         dispatcher.utter_message(response="utter_confirm")
-        return [SlotSet(key="time")]
+        return [
+            SlotSet(key="time"), 
+            SlotSet(key="amount")
+        ]
+
