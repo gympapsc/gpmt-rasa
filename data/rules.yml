@@ -52,9 +52,8 @@ rules:
     - questionnaire: true
   - active_loop: form_disease
   steps:
+  - action: form_disease
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - slot_was_set:
-    - answer: null
   - action: action_questionnaire
