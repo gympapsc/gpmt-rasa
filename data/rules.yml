@@ -1,27 +1,19 @@
 version: "2.0"
-
 rules:
-
 - rule: Start questionnaire
-  conversation_start: true
-  condition:
-    - slot_was_set:
-      - questionnaire: false
   steps:
-    - intent: greet
-    - action: utter_greet
-    - action: utter_questionnaire_start
-    - action: action_questionnaire
-
+  - intent: greet
+  - action: utter_greet
+  - action: utter_questionnaire_start
+  - action: action_questionnaire
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
-
 - rule: Add micturition entry
   condition:
-    - slot_was_set:
-      - questionnaire: false
+  - slot_was_set:
+    - questionnaire: false
   steps:
   - intent: add_micturition
   - action: form_add_micturition
@@ -29,15 +21,15 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-    - time
+  - slot_was_set:
+    - time: filled
   - action: action_add_micturition
   - slot_was_set:
     - time: null
-
 - rule: Add drinking entry
   condition:
-    - slot_was_set:
-      - questionnaire: false
+  - slot_was_set:
+    - questionnaire: false
   steps:
   - intent: add_drinking
   - action: form_add_drinking
@@ -45,21 +37,24 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-    - time
-    - amount
+  - slot_was_set:
+    - time: filled
+  - slot_was_set:
+    - amount: null
   - action: action_add_drinking
   - slot_was_set:
     - time: null
+  - slot_was_set:
     - amount: null
-
 - rule: Questionnaire disease
   condition:
-    - slot_was_set:
-      - questionnaire: true
-    - active_loop: form_disease
+  - slot_was_set:
+    - questionnaire: true
+  - active_loop: form_disease
   steps:
-    - active_loop: null
-    - slot_was_set:
-      - requested_slot: null
-      - answer
-    - action: action_questionnaire
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - answer: null
+  - action: action_questionnaire
