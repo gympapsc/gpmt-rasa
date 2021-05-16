@@ -48,7 +48,7 @@ responses:
   utter_ask_form_add_drinking_amount:
   - text: "Und wie viel?"
 
-  utter_ask_form_disease_disease:
+  utter_ask_form_disease_answer:
   - text: "Unter welcher Krankheit leidest du?"
 
   utter_questionnaire_finished:
@@ -65,13 +65,8 @@ slots:
     type: text
   amount:
     type: any
-
-  questionnaire:
-    type: bool
-    initial_value: true
-    influence_conversation: true
-  answer:
-    type: any
+  disease:
+    type: text
   
 
 forms:
@@ -88,8 +83,8 @@ forms:
       - type: from_entity
         entity: volume
 
-  form_disease:
-    answer:
+  form_questionnaire:
+    disease:
       - type: from_entity
         entity: disease
 

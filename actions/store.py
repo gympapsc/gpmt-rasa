@@ -3,7 +3,9 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
 
+import logging
 
+logger = logging.getLogger(__name__)
 
 
 class Store:
@@ -56,15 +58,21 @@ class Store:
         })
 
     def get_next_question(self, question_id, answer):
-        curr_question = self.mongodb["questions"].find_one({ "_id": question_id })
+        # curr_question = self.mongodb["questionnaire"].find_one({ "_id": ObjectId(question_id)})
 
-        for n in curr_question.next:
-            # TODO handle complex conditions
-            if n.condition == answer:
-                return self.mongodb["questions"].find_one({ "_id": n.question })
+        # logger.debug(list(curr_question["next"]))
+
+        # for n in curr_question["next"]:
+        #     # TODO handle complex conditions
+        #     if n["condition"] == answer:
+        #         return self.mongodb["questionnaire"].find_one({ "_id": n["question"] })
+        pass
 
     def get_root_question(self):
-        return self.mongodb["questions"].find_one({ "root": True })
+        return self.mongodb["questionnaire"].find_one({ "root": True })
+
+    def get_question(self, question_id):
+        return self.mongodb["questionnaire"].find_one({ "_id": ObjectId(question_id)})
 
     # def edit_micturition(self, userid="", id):
     #     pass

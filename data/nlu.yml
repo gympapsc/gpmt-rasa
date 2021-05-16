@@ -87,5 +87,5 @@ nlu:
 
 - intent: fill_disease
   examples: |
-    - Ich leide unter [muliples sklerose](disease)
-    - Ich leide unter [ms](disease)
+    - Ich leide unter [muliples sklerose](answer)
+    - Ich leide unter [ms](answer)
