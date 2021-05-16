@@ -1,56 +1,53 @@
-version: "2.0"
+version: '2.0'
 
 intents:
-  - greet
-  - goodbye
-  - add_micturition
-  - deny
-  - affirm
-  - fill_micturition_time
-  - add_drinking
-  - fill_drinking_time
-  - fill_drinking_amount
-  - fill_disease
-  - fill_time
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- add_micturition:
+    use_entities: true
+- deny:
+    use_entities: true
+- affirm:
+    use_entities: true
+- fill_micturition_time:
+    use_entities: true
+- add_drinking:
+    use_entities: true
+- fill_drinking_time:
+    use_entities: true
+- fill_drinking_amount:
+    use_entities: true
+- fill_disease:
+    use_entities: true
+- fill_time:
+    use_entities: true
 
-actions:
-  - action_add_micturition
-  - action_add_drinking
-  - action_questionnaire
 
 responses:
   utter_greet:
-  - text: "Hallo ich bin dein chatbot"
-
+  - text: Hallo ich bin dein chatbot
   utter_questionnaire_start:
-  - text: "Ich möchte dir ein paar Fragen stellen."
-
+  - text: Ich möchte dir ein paar Fragen stellen.
   utter_did_that_help:
-  - text: "Hilft dir das weiter?"
-
+  - text: Hilft dir das weiter?
   utter_goodbye:
-  - text: "Tschüss"
-
+  - text: Tschüss
   utter_iamabot:
-  - text: "Ich bin deine Hilfe"
-
+  - text: Ich bin deine Hilfe
   utter_confirm:
-  - text: "Hab's eingetragen"
-  - text: "Ist gespeichert"
-  - text: "Alles klar!"
-
+  - text: Hab's eingetragen
+  - text: Ist gespeichert
+  - text: Alles klar!
   utter_ask_form_add_micturition_time:
-  - text: "Wann warst du auf Toilette?"
-
+  - text: Wann warst du auf Toilette?
   utter_ask_form_add_drinking_time:
-  - text: "Wann genau hast du Etwas getrunken?"
-
+  - text: Wann genau hast du Etwas getrunken?
   utter_ask_form_add_drinking_amount:
   - text: "Und wie viel?"
-
   utter_ask_form_disease_answer:
   - text: "Unter welcher Krankheit leidest du?"
-
   utter_questionnaire_finished:
   - text: "Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen."
 
@@ -67,18 +64,18 @@ slots:
     type: any
   disease:
     type: text
+  question_id:
+    type: text
+  requested_slot:
+    type: any
   
 
 forms:
   form_add_micturition:
     time:
-      - type: from_entity
-        entity: time
-  
+    - entity: time
+      type: from_entity
   form_add_drinking:
-    time:
-      - type: from_entity
-        entity: time
     amount:
       - type: from_entity
         entity: volume

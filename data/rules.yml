@@ -1,7 +1,5 @@
 version: "2.0"
-
 rules:
-
 - rule: Start questionnaire
   steps:
     - intent: greet
@@ -18,7 +16,6 @@ rules:
   steps:
   - intent: goodbye
   - action: utter_goodbye
-
 - rule: Add micturition entry
   steps:
   - intent: add_micturition
@@ -27,11 +24,11 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-    - time
+  - slot_was_set:
+    - time: filled
   - action: action_add_micturition
   - slot_was_set:
     - time: null
-
 - rule: Add drinking entry
   steps:
   - intent: add_drinking
@@ -40,9 +37,12 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-    - time
-    - amount
+  - slot_was_set:
+    - time: filled
+  - slot_was_set:
+    - amount: null
   - action: action_add_drinking
   - slot_was_set:
     - time: null
+  - slot_was_set:
     - amount: null
