@@ -17,7 +17,7 @@ pipeline:
   - name: DIETClassifier
     epochs: 100
     constrain_similarities: true
-  - name: "DucklingHTTPExtractor"
+  - name: "DucklingEntityExtractor"
     url: "http://localhost:8000"
     dimensions: ["time", "number", "amount-of-money", "distance", "quantity", "volume"]
     locale: "de_DE"

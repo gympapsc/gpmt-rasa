@@ -67,15 +67,17 @@ nlu:
 
 - intent: fill_micturition_time
   examples: |
-    - Ich war um [](time) auf Toilette
     - Um [](time) war meine Miktion
-    - [](time)
+
 
 - intent: fill_drinking_time
   examples: |
     - Ich habe das letzte mal [](time) Etwas getrunken
-    - [](time)
     - So gegen [](time)
+
+- intent: fill_time
+  examples: |
+    - [](time)
 
 - intent: fill_drinking_amount
   examples: |

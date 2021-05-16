@@ -2,17 +2,16 @@ version: "2.0"
 
 rules:
 
-- rule:
-  - rule: Start questionnaire
-    conversation_start: true
-    condition:
-      - slot_was_set:
-        - questionnaire: false
-    steps:
-      - intent: greet
-      - action: utter_greet
-      - action: utter_questionnaire_start
-      - action: action_questionnaire
+- rule: Start questionnaire
+  conversation_start: true
+  condition:
+    - slot_was_set:
+      - questionnaire: false
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: utter_questionnaire_start
+    - action: action_questionnaire
 
 - rule: Say goodbye anytime the user says goodbye
   steps:
