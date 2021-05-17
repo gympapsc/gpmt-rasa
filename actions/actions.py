@@ -77,12 +77,37 @@ class ValidateQuestionnaireForm(FormValidationAction):
             last_question = store.get_question(question_id)
             logger.info("LAST QUESTION %s", last_question["name"])
             answer = tracker.get_slot(str(last_question["name"]))
-            logger.info("LAST ANSWER %s", answer)
-            store.save_answer(tracker.sender_id, question_id, answer)
-            question = store.get_next_question(question_id, answer)
-            logger.info("NEXT QUESTION %s", question["name"])
-            if question is None:
-                return slots_mapped_in_domain
-        
-        tracker.add_slots(SlotSet("question_id", str(question["_id"])))
-        return slots_mapped_in_domain.append(question["name"])
+            if not answer is None:
+                logger.info("LAST ANSWER %s", answer)
+                store.save_answer(tracker.sender_id, question_id, answer)
+                question = store.get_next_question(question_id, answer)
+                if question is None:
+                    return slots_mapped_in_domain
+                logger.info("NEXT QUESTION %s", question["name"])
+            else:
+                question = last_question
+
+        logger.info("ADD SLOT %s", str(question["_id"]))
+        tracker.add_slots([SlotSet("question_id", str(question["_id"]))])
+        slots_mapped_in_domain.append(question["name"])
+        return slots_mapped_in_domain
+    
+    def entity_is_desired(
+        slot_mapping: Dict[Text, Any],
+        slot: Text,
+        entity_type_of_slot_to_fill: Text, 
+        tracker: Tracker, 
+        domain: Dict[Text, Any]
+    ) -> bool:
+        logger.info("IS ENTITY TYPE %s of SLOT %s desired", slot, entity_type_of_slot_to_fill)
+        return True
+
+    # async def extract_disease(
+    #     self, 
+    #     dispatcher: CollectingDispatcher, 
+    #     tracker: Tracker, 
+    #     domain: Dict
+    # ):
+    #     text_of_last_user_message = tracker.latest_message.get("text")
+    #     logger.info("USER MESSAGE %s", text_of_last_user_message)
+    #     return { "disease": text_of_last_user_message }
