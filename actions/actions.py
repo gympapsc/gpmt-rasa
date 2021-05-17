@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from typing import Any, Text, Dict, List
-from bson.codec_options import CodecOptions
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import FollowupAction, SlotSet, AllSlotsReset
@@ -13,6 +12,8 @@ from actions.store import Store
 import logging
 
 logger = logging.getLogger(__name__)
+
+logger.info("TEST")
 
 store = Store()
 
@@ -68,13 +69,18 @@ class ValidateQuestionnaireForm(FormValidationAction):
         domain: Dict[Text, Any]
     ):
         question_id = tracker.get_slot("question_id")
+        logger.info("QUESTION ID %s", question_id)
         if question_id is None:
             question = store.get_root_question()
+            logger.info("QUESTION %s", question["name"])
         else:
             last_question = store.get_question(question_id)
+            logger.info("LAST QUESTION %s", last_question["name"])
             answer = tracker.get_slot(str(last_question["name"]))
+            logger.info("LAST ANSWER %s", answer)
             store.save_answer(tracker.sender_id, question_id, answer)
             question = store.get_next_question(question_id, answer)
+            logger.info("NEXT QUESTION %s", question["name"])
             if question is None:
                 return slots_mapped_in_domain
         

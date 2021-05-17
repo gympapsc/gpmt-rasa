@@ -1,5 +1,10 @@
 version: '2.0'
 
+actions:
+  - action_add_micturition
+  - action_add_drinking
+  - validate_form_questionnaire
+
 intents:
 - greet:
     use_entities: true
