@@ -5,7 +5,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import FollowupAction, SlotSet, AllSlotsReset
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormValidationAction
+from rasa_sdk.forms import FormValidationAction, REQUESTED_SLOT
 
 from actions.store import Store
 
@@ -56,18 +56,32 @@ class ActionAddDrinking(Action):
             SlotSet(key="amount")
         ]
 
+class ActionExitQuestionnaire(Action):
+
+    def name(self):
+        return "action_exit_questionnaire"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        return [ SlotSet("questionnaire", False) ]
+
 class ValidateQuestionnaireForm(FormValidationAction):
 
     def name(self):
         return "validate_form_questionnaire"
     
-    async def required_slots(
-        self,
-        slots_mapped_in_domain: List[Text],
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
+    async def run(
+        self, 
+        dispatcher: CollectingDispatcher, 
+        tracker: Tracker, 
         domain: Dict[Text, Any]
     ):
+        validation_events = await self.validate(dispatcher, tracker, domain)
+
         question_id = tracker.get_slot("question_id")
         logger.info("QUESTION ID %s", question_id)
         if question_id is None:
@@ -77,37 +91,31 @@ class ValidateQuestionnaireForm(FormValidationAction):
             last_question = store.get_question(question_id)
             logger.info("LAST QUESTION %s", last_question["name"])
             answer = tracker.get_slot(str(last_question["name"]))
-            if not answer is None:
+            if answer is None:
+                question = last_question
+            else:
                 logger.info("LAST ANSWER %s", answer)
                 store.save_answer(tracker.sender_id, question_id, answer)
                 question = store.get_next_question(question_id, answer)
                 if question is None:
-                    return slots_mapped_in_domain
+                    return [
+                        SlotSet(REQUESTED_SLOT, None)
+                    ]
                 logger.info("NEXT QUESTION %s", question["name"])
-            else:
-                question = last_question
 
         logger.info("ADD SLOT %s", str(question["_id"]))
-        tracker.add_slots([SlotSet("question_id", str(question["_id"]))])
-        slots_mapped_in_domain.append(question["name"])
-        return slots_mapped_in_domain
+        
+        return validation_events + [
+            SlotSet("question_id", str(question["_id"])),
+            SlotSet(REQUESTED_SLOT, question["name"])
+        ]
     
-    def entity_is_desired(
-        slot_mapping: Dict[Text, Any],
-        slot: Text,
-        entity_type_of_slot_to_fill: Text, 
-        tracker: Tracker, 
+    def validate_disease(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
         domain: Dict[Text, Any]
-    ) -> bool:
-        logger.info("IS ENTITY TYPE %s of SLOT %s desired", slot, entity_type_of_slot_to_fill)
-        return True
-
-    # async def extract_disease(
-    #     self, 
-    #     dispatcher: CollectingDispatcher, 
-    #     tracker: Tracker, 
-    #     domain: Dict
-    # ):
-    #     text_of_last_user_message = tracker.latest_message.get("text")
-    #     logger.info("USER MESSAGE %s", text_of_last_user_message)
-    #     return { "disease": text_of_last_user_message }
+    ):
+        logger.info("SLOT VALUE %s", slot_value)
+        return {"disease": slot_value}

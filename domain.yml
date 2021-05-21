@@ -86,6 +86,7 @@ forms:
         entity: volume
 
   form_questionnaire:
+    required_slots: []
     disease:
       - type: from_entity
         entity: disease
