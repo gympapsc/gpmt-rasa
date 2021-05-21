@@ -51,7 +51,7 @@ responses:
   - text: Wann genau hast du Etwas getrunken?
   utter_ask_form_add_drinking_amount:
   - text: "Und wie viel?"
-  utter_ask_form_disease_answer:
+  utter_ask_form_questionnaire_disease:
   - text: "Unter welcher Krankheit leidest du?"
   utter_questionnaire_finished:
   - text: "Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen."
