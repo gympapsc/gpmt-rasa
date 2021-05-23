@@ -94,18 +94,20 @@ actions:
 
 forms:
   form_add_micturition:
-    time:
-    - entity: time
-      type: from_entity
+    required_slots:
+      time:
+      - entity: time
+        type: from_entity
   form_add_drinking:
-    amount:
-    - entity: volume
-      type: from_entity
-    time:
-    - entity: time
-      type: from_entity
+    required_slots:
+      amount:
+      - entity: volume
+        type: from_entity
+      time:
+      - entity: time
+        type: from_entity
   form_questionnaire:
     disease:
     - entity: disease
       type: from_entity
-    required_slots: []
+    required_slots: {}
