@@ -3,87 +3,90 @@ version: "2.0"
 nlu:
 - intent: greet
   examples: |
-    - Hi
-    - Hallo
+    - hey
+    - hello
     - hi
-    - Moin
-    - Guten Morgen
-    - Guten Abend
-    - Hey
-    - Los geht's    
-    - Was läuft
-    - gutenmorgen
-    - gutenabend
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
 
 - intent: goodbye
   examples: |
-    - Tschüss
-    - Bis später
-    - Bis dann
-    - man sieht sich
-    - gute nacht
-    - schlaf gut
-    - schönen tag noch
-    - Tschüsssss
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
 
 - intent: affirm
   examples: |
-    - ja
-    - jaaaaa
-    - na klarrrrr
-    - natürlich
-    - hört sich gut an
-    - richtig
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
 
 - intent: deny
   examples: |
-    - nein
+    - no
     - n
-    - niemals
-    - glaube ich nicht
-    - ich lehne das ab
-    - auf keinen fall
-    - nicht wirklich
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
 
-- intent: add_micturition
+- intent: mood_great
   examples: |
-    - Ich war auf Toilette
-    - Ich habe aus getretten
-    - Miktionseintrag
-    - Miktion
-    - Mache einen Miktionseintrag
-    - Ich habe gepinkelt
-    - Ich war um [](time) auf Toilette
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
 
-- intent: add_drinking
+- intent: mood_unhappy
   examples: |
-    - Ich habe etwas getrunken
-    - Trinkeintrag
-    - Wasser
-    - Kaffee
-    - Ich habe [](time) [](volume) Wasser getrunken
-    - [](volume) Wasser um [](time) getrunken
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
 
-- intent: fill_micturition_time
+- intent: bot_challenge
   examples: |
-    - Um [](time) war meine Miktion
-
-- intent: fill_drinking_time
-  examples: |
-    - Ich habe das letzte mal [](time) Etwas getrunken
-    - So gegen [](time)
-
-- intent: fill_time
-  examples: |
-    - [](time)
-
-- intent: fill_drinking_amount
-  examples: |
-    - Ich habe ungefähr [](volume) getrunken
-    - So etwa [](volume)
-    - [](volume)
-
-- intent: fill_disease
-  examples: |
-    - Ich leide unter [muliples sklerose](disease)
-    - Ich leide unter [ms](disease)
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?

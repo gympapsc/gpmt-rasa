@@ -1,56 +1,13 @@
 version: "2.0"
+
 rules:
-- rule: Start questionnaire
-  condition:
-    - slot_was_set:
-      - questionnaire: true
-  steps:
-    - intent: greet
-    - action: utter_greet
-    - action: utter_questionnaire_start
-    - action: form_questionnaire
-    - active_loop: form_questionnaire
-    - active_loop: null
-    - slot_was_set:
-      - requested_slot: null
-    - action: utter_questionnaire_finished
-    - action: action_exit_questionnaire
-    - slot_was_set:
-      - questionnaire: false
 
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
-  
-- rule: Add micturition entry
-  steps:
-  - intent: add_micturition
-  - action: form_add_micturition
-  - active_loop: form_add_micturition
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - time
-  - action: action_add_micturition
-  - slot_was_set:
-    - time: null
 
-- rule: Add drinking entry
+- rule: Say 'I am a bot' anytime the user challenges
   steps:
-  - intent: add_drinking
-  - action: form_add_drinking
-  - active_loop: form_add_drinking
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - time
-  - slot_was_set:
-    - amount: null
-  - action: action_add_drinking
-  - slot_was_set:
-    - time: null
-  - slot_was_set:
-    - amount: null
+  - intent: bot_challenge
+  - action: utter_iamabot
