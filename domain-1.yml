@@ -1,0 +1,63 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- add_micturition:
+    use_entities: true
+- deny:
+    use_entities: true
+- affirm:
+    use_entities: true
+- fill_micturition_time:
+    use_entities: true
+- add_drinking:
+    use_entities: true
+- fill_drinking_time:
+    use_entities: true
+- fill_drinking_amount:
+    use_entities: true
+- fill_disease:
+    use_entities: true
+- fill_time:
+    use_entities: true
+entities:
+- time
+- volume
+- disease
+slots:
+  time:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  amount:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  disease:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  question_id:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  requested_slot:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses: {}
+actions: []
+forms: {}
+e2e_actions: []
