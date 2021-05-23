@@ -30,7 +30,39 @@ intents:
 - fill_time:
     use_entities: true
 
+entities:
+- time
+- volume
+- disease
 
+slots:
+  time:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  amount:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  disease:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  question_id:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  requested_slot:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+
+  
 responses:
   utter_greet:
   - text: "Hallo ich bin dein chatbot"
@@ -51,39 +83,17 @@ responses:
   utter_ask_form_add_drinking_time:
   - text: "Wann genau hast du Etwas getrunken?"
   utter_ask_form_add_drinking_amount:
-  - text: "Und wie viel?"
+  - text: Und wie viel?
   utter_ask_form_questionnaire_disease:
-  - text: "Unter welcher Krankheit leidest du?"
+  - text: Unter welcher Krankheit leidest du?
   utter_questionnaire_finished:
   - text: "Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen."
-
-
-entities:
-  - time
-  - volume
-  - disease
-
-slots:
-  time:
-    type: text
-  amount:
-    type: any
-  questionnaire:
-    type: bool
-    initial_value: false
-  disease:
-    type: text
-  question_id:
-    type: text
-  requested_slot:
-    type: any
-  
 
 forms:
   form_add_micturition:
     time:
-      - entity: time
-        type: from_entity
+    - entity: time
+      type: from_entity
   form_add_drinking:
     amount:
       - type: from_entity
