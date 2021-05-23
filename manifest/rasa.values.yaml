@@ -5,12 +5,15 @@ rasax:
 
 rasa:
     version: "2.6.0"
+    name: "hakrac/gpmt-rasa"
+    tag: "latest"
 
     additionalChannelCredentials:
-        rest:
+        # rest:
+        channels.redis.RedisInputChannel:
 
 app:
-    name: "hakrac/gpmt-rasa"
+    name: "hakrac/gpmt-rasa-actions"
     # name: "gpmtregistry.azurecr.io/gpmt-rasa-actions"
     tag: "latest"
 

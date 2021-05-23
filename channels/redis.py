@@ -1,6 +1,7 @@
 import asyncio
 import inspect
 import json
+import threading
 from sanic import Sanic, Blueprint, response
 from sanic.request import Request
 from sanic.response import HTTPResponse
@@ -15,15 +16,58 @@ from rasa.core.channels.channel import (
     UserMessage,
 )
 
+
+
+class RedisStream:
+
+    def __init__(self, name, groupname, consumername):
+        self.streamname = name
+        self.groupname = groupname
+        self.consumername = consumername
+
+        self.r = redis.Redis(host="gpmt-redis.default.svc.cluster.local")
+        try:
+            self.r.xgroup_create(name, groupname, id="$", mkstream=True)
+        except:
+            pass
+
+
+    def on(self, fn):
+        def worker(r, streamname, groupname, consumername, fn):
+            while True:
+                messages = dict(
+                    r.xreadgroup(
+                        groupname, 
+                        consumername, 
+                        { streamname: ">", }, 
+                        block=0, 
+                        noack=True
+                    )
+                )[bytes(streamname, "utf-8")]
+                for message in messages:
+                    fn(message[0], message[1])
+                    r.xack(streamname, groupname, message[0])
+
+        x = threading.Thread(target=worker, args=(
+            self.r,
+            self.streamname,
+            self.groupname,
+            self.consumername,
+            fn
+        ), daemon=True)
+        x.start()
+
+        return fn
+
+    def add(self, message):
+        self.r.xadd(self.streamname, message)
+
+
+redisStream = RedisStream("rasa", "gpmt-rasa", "0")
+
 class RedisInputChannel(InputChannel):
 
-    def __init__(self):
-        self.redis_client = redis.Redis(
-            host="gpmt-redis.default.svc.cluster.local",
-            port=6379
-        )
-        self.p = self.redis_client.pubsub()
-
+    @staticmethod
     def name() -> Text:
         """Name of your custom channel."""
         return "redisInput"
@@ -41,24 +85,21 @@ class RedisInputChannel(InputChannel):
         async def health(request: Request) -> HTTPResponse:
             return response.json({"status": "ok"})
 
-        async def on_message(message):
-            m = json.loads(message["data"])
+        
+        @redisStream.on
+        def on_message(id, message):
             output_channel = RedisOutputChannel()
 
-            await on_new_message(
+            on_new_message(
                 UserMessage(
-                    m["text"],
+                    message[b'text'].decode("utf-8"),
                     output_channel,
-                    m["sender_id"],
+                    "hakim",
+                    # m["sender_id"],
                     input_channel=self.name(),
                     metadata={},
                 )
             )
-
-        self.p.subscribe(**{
-            "ADD_USER_MESSAGE": on_message 
-        })
-        thread = self.p.run_in_thread(sleep_time=0.001)
 
         return custom_webhook
 
@@ -71,14 +112,11 @@ class RedisOutputChannel(OutputChannel):
         )
         self.p = self.redis_client.pubsub()
     
+    @staticmethod
     def name() -> Text:
         return "redisOutput"
     
     def send_text_message(
         self, recipient_id: Text, text: Text, **kwargs: Any
     ):
-        fjson_data = json.dumps({
-            "sender_id": recipient_id,
-            "text": text
-        })
-        self.redis_client.publish("ADD_BOT_MESSAGE", fjson_data)
+        redisStream.add({"message": text, "recipient_id": recipient_id})

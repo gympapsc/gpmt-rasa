@@ -78,9 +78,12 @@ slots:
 forms:
   form_add_micturition:
     time:
-    - entity: time
-      type: from_entity
+      - entity: time
+        type: from_entity
   form_add_drinking:
+    time:
+      - entity: time
+        type: from_entity
     amount:
       - type: from_entity
         entity: volume

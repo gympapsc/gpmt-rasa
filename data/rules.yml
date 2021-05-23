@@ -16,6 +16,7 @@ rules:
   steps:
   - intent: goodbye
   - action: utter_goodbye
+  
 - rule: Add micturition entry
   steps:
   - intent: add_micturition
@@ -29,6 +30,7 @@ rules:
   - action: action_add_micturition
   - slot_was_set:
     - time: null
+
 - rule: Add drinking entry
   steps:
   - intent: add_drinking
