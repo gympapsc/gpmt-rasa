@@ -107,7 +107,7 @@ forms:
       - entity: time
         type: from_entity
   form_questionnaire:
-    required_slots:
-      disease:
-      - entity: disease
-        type: from_entity
+    required_slots: []
+    disease:
+    - entity: disease
+      type: from_entity
