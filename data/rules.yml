@@ -1,50 +1,50 @@
 version: "2.0"
-# rules:
-# - rule: Start questionnaire
-#   steps:
-#     - intent: greet
-#     - action: utter_greet
-#     - action: utter_questionnaire_start
-#     - action: form_questionnaire
-#     - active_loop: form_questionnaire
-#     - active_loop: null
-#     - slot_was_set:
-#       - requested_slot: null
-#     - action: utter_questionnaire_finished
+rules:
+- rule: Start questionnaire
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: utter_questionnaire_start
+    - action: form_questionnaire
+    - active_loop: form_questionnaire
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+    - action: utter_questionnaire_finished
 
-# - rule: Say goodbye anytime the user says goodbye
-#   steps:
-#   - intent: goodbye
-#   - action: utter_goodbye
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
   
-# - rule: Add micturition entry
-#   steps:
-#   - intent: add_micturition
-#   - action: form_add_micturition
-#   - active_loop: form_add_micturition
-#   - active_loop: null
-#   - slot_was_set:
-#     - requested_slot: null
-#   - slot_was_set:
-#     - time: filled
-#   - action: action_add_micturition
-#   - slot_was_set:
-#     - time: null
+- rule: Add micturition entry
+  steps:
+  - intent: add_micturition
+  - action: form_add_micturition
+  - active_loop: form_add_micturition
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - time: filled
+  - action: action_add_micturition
+  - slot_was_set:
+    - time: null
 
-# - rule: Add drinking entry
-#   steps:
-#   - intent: add_drinking
-#   - action: form_add_drinking
-#   - active_loop: form_add_drinking
-#   - active_loop: null
-#   - slot_was_set:
-#     - requested_slot: null
-#   - slot_was_set:
-#     - time: filled
-#   - slot_was_set:
-#     - amount: null
-#   - action: action_add_drinking
-#   - slot_was_set:
-#     - time: null
-#   - slot_was_set:
-#     - amount: null
+- rule: Add drinking entry
+  steps:
+  - intent: add_drinking
+  - action: form_add_drinking
+  - active_loop: form_add_drinking
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - time: filled
+  - slot_was_set:
+    - amount: null
+  - action: action_add_drinking
+  - slot_was_set:
+    - time: null
+  - slot_was_set:
+    - amount: null
