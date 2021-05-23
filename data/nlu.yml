@@ -64,11 +64,9 @@ nlu:
     - Ich habe [](time) [](volume) Wasser getrunken
     - [](volume) Wasser um [](time) getrunken
 
-
 - intent: fill_micturition_time
   examples: |
     - Um [](time) war meine Miktion
-
 
 - intent: fill_drinking_time
   examples: |

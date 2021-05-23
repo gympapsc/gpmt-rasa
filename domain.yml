@@ -4,6 +4,7 @@ actions:
   - action_add_micturition
   - action_add_drinking
   - validate_form_questionnaire
+  - action_exit_questionnaire
 
 intents:
 - greet:
@@ -32,23 +33,23 @@ intents:
 
 responses:
   utter_greet:
-  - text: Hallo ich bin dein chatbot
+  - text: "Hallo ich bin dein chatbot"
   utter_questionnaire_start:
-  - text: Ich möchte dir ein paar Fragen stellen.
+  - text: "Ich möchte dir ein paar Fragen stellen."
   utter_did_that_help:
-  - text: Hilft dir das weiter?
+  - text: "Hilft dir das weiter?"
   utter_goodbye:
-  - text: Tschüss
+  - text: "Tschüss"
   utter_iamabot:
-  - text: Ich bin deine Hilfe
+  - text: "Ich bin deine Hilfe"
   utter_confirm:
-  - text: Hab's eingetragen
-  - text: Ist gespeichert
-  - text: Alles klar!
+  - text: "Hab's eingetragen"
+  - text: "Ist gespeichert"
+  - text: "Alles klar!"
   utter_ask_form_add_micturition_time:
-  - text: Wann warst du auf Toilette?
+  - text: "Wann warst du auf Toilette?"
   utter_ask_form_add_drinking_time:
-  - text: Wann genau hast du Etwas getrunken?
+  - text: "Wann genau hast du Etwas getrunken?"
   utter_ask_form_add_drinking_amount:
   - text: "Und wie viel?"
   utter_ask_form_questionnaire_disease:
@@ -67,6 +68,9 @@ slots:
     type: text
   amount:
     type: any
+  questionnaire:
+    type: bool
+    initial_value: false
   disease:
     type: text
   question_id:
@@ -81,18 +85,14 @@ forms:
       - entity: time
         type: from_entity
   form_add_drinking:
-    time:
-      - entity: time
-        type: from_entity
     amount:
       - type: from_entity
         entity: volume
-
   form_questionnaire:
-    required_slots: []
     disease:
       - type: from_entity
         entity: disease
+    required_slots: []
 
 
 session_config:

@@ -1,6 +1,9 @@
 version: "2.0"
 rules:
 - rule: Start questionnaire
+  condition:
+    - slot_was_set:
+      - questionnaire: true
   steps:
     - intent: greet
     - action: utter_greet
@@ -11,6 +14,9 @@ rules:
     - slot_was_set:
       - requested_slot: null
     - action: utter_questionnaire_finished
+    - action: action_exit_questionnaire
+    - slot_was_set:
+      - questionnaire: false
 
 - rule: Say goodbye anytime the user says goodbye
   steps:
@@ -26,7 +32,7 @@ rules:
   - slot_was_set:
     - requested_slot: null
   - slot_was_set:
-    - time: filled
+    - time
   - action: action_add_micturition
   - slot_was_set:
     - time: null
@@ -40,7 +46,7 @@ rules:
   - slot_was_set:
     - requested_slot: null
   - slot_was_set:
-    - time: filled
+    - time
   - slot_was_set:
     - amount: null
   - action: action_add_drinking
