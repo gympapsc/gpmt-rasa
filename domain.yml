@@ -1,34 +1,111 @@
-version: "2.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
-responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+version: '2.0'
 
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+intents:
+  - greet:
+      use_entities: true
+  - goodbye:
+      use_entities: true
+  - add_micturition:
+      use_entities: true
+  - deny:
+      use_entities: true
+  - affirm:
+      use_entities: true
+  - fill_micturition_time:
+      use_entities: true
+  - add_drinking:
+      use_entities: true
+  - fill_drinking_time:
+      use_entities: true
+  - fill_drinking_amount:
+      use_entities: true
+  - fill_disease:
+      use_entities: true
+  - fill_time:
+      use_entities: true
+
+entities:
+  - time
+  - volume
+  - disease
+
+slots:
+  time:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  amount:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  disease:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  question_id:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  requested_slot:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+
+responses:
+  utter_greet:
+  - text: Hallo ich bin dein chatbot
+  utter_questionnaire_start:
+  - text: Ich möchte dir ein paar Fragen stellen.
+  utter_did_that_help:
+  - text: Hilft dir das weiter?
+  utter_goodbye:
+  - text: Tschüss
+  utter_iamabot:
+  - text: Ich bin deine Hilfe
+  utter_confirm:
+  - text: Hab's eingetragen
+  - text: Ist gespeichert
+  - text: Alles klar!
+  utter_ask_form_add_micturition_time:
+  - text: Wann warst du auf Toilette?
+  utter_ask_form_add_drinking_time:
+  - text: Wann genau hast du Etwas getrunken?
+  utter_ask_form_add_drinking_amount:
+  - text: Und wie viel?
+  utter_ask_form_questionnaire_disease:
+  - text: Unter welcher Krankheit leidest du?
+  utter_questionnaire_finished:
+  - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen.
+
+actions:
+  - action_add_micturition
+  - action_add_drinking
+  - validate_form_questionnaire
+  - action_exit_questionnaire
+
+forms:
+  form_add_micturition:
+    time:
+    - entity: time
+      type: from_entity
+  form_add_drinking:
+    amount:
+    - entity: volume
+      type: from_entity
+    time:
+    - entity: time
+      type: from_entity
+  form_questionnaire:
+    disease:
+    - entity: disease
+      type: from_entity
+    required_slots: []
