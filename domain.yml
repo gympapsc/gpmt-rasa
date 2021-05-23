@@ -94,18 +94,16 @@ actions:
 
 forms:
   form_add_micturition:
-    required_slots:
-      time:
-      - entity: time
-        type: from_entity
+    time:
+    - entity: time
+      type: from_entity
   form_add_drinking:
-    required_slots:
-      amount:
-      - entity: volume
-        type: from_entity
-      time:
-      - entity: time
-        type: from_entity
+    amount:
+    - entity: volume
+      type: from_entity
+    time:
+    - entity: time
+      type: from_entity
   form_questionnaire:
     required_slots: []
     disease:
