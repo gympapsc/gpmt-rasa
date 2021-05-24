@@ -4,6 +4,7 @@ rules:
   condition:
   - slot_was_set:
     - questionnaire: true
+  conversation_start: true
   steps:
   - intent: greet
   - action: utter_greet

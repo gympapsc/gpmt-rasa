@@ -62,9 +62,14 @@ slots:
     initial_value: true
     auto_fill: true
     influence_conversation: true
+  name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
 responses:
   utter_greet:
-  - text: Hallo ich bin dein chatbot
+  - text: Hallo {name}, ich bin dein chatbot
   utter_questionnaire_start:
   - text: Ich möchte dir ein paar Fragen stellen.
   utter_did_that_help:
