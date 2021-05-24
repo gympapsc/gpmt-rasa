@@ -6,6 +6,7 @@ rules:
     - questionnaire: true
   steps:
   - intent: greet
+  - action: action_init
   - action: utter_greet
   - action: utter_questionnaire_start
   - action: form_questionnaire
@@ -17,6 +18,7 @@ rules:
   - action: action_exit_questionnaire
   - slot_was_set:
     - questionnaire: false
+
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye

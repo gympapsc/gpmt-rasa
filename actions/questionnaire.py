@@ -2,83 +2,76 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import FollowupAction, SlotSet, AllSlotsReset
+from rasa_sdk.forms import FormValidationAction, REQUESTED_SLOT
 from rasa_sdk.executor import CollectingDispatcher
 
 from actions.store import Store
 
-# store = Store()
+import logging
 
+logger = logging.getLogger(__name__)
+store = Store()
 
-# class ActionQuestionnaire(Action):
+class ValidateQuestionnaireForm(FormValidationAction):
 
-#     def name(self):
-#         return "action_questionnaire"
+    def name(self):
+        return "validate_form_questionnaire"
     
-#     def run(
-#         self,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: Dict[Text, Any]
-#     ):
+    async def run(
+        self, 
+        dispatcher: CollectingDispatcher, 
+        tracker: Tracker, 
+        domain: Dict[Text, Any]
+    ):
+        validation_events = await self.validate(dispatcher, tracker, domain)
 
-#         question_id = tracker.get_slot("question_id")
-#         if question_id is None:
-#             question = store.get_root_question()
-#             return [
-#                 FollowupAction(name=question["name"]),
-#                 SlotSet("questionnaire", True)
-#             ]
+        question_id = tracker.get_slot("question_id")
+        logger.info("QUESTION ID %s", question_id)
+        if question_id is None:
+            question = store.get_root_question()
+            logger.info("QUESTION %s", question["name"])
+        else:
+            last_question = store.get_question(question_id)
+            logger.info("LAST QUESTION %s", last_question["name"])
+            answer = tracker.get_slot(str(last_question["name"]))
+            if answer is None:
+                question = last_question
+            else:
+                logger.info("LAST ANSWER %s", answer)
+                store.save_answer(tracker.sender_id, question_id, answer)
+                question = store.get_next_question(question_id, answer)
+                if question is None:
+                    return [
+                        SlotSet(REQUESTED_SLOT, None)
+                    ]
+                logger.info("NEXT QUESTION %s", question["name"])
 
-#         answer = tracker.get_slot("answer")
-#         store.save_answer(tracker.sender_id, answer, question_id)
-#         question = store.get_next_question(question_id, answer)
-
-#         if question is None:
-#             dispatcher.utter_message(response="utter_questionnaire_finished")
-#             return [
-#                 SlotSet("questionnaire", False)
-#             ]
-#         return [
-#             FollowupAction(name=question["name"]), 
-#             SlotSet("question_id", question["_id"])
-#         ]
-
-
-# class ActionQuestionnaire(Action):
-
-#     def name(self):
-#         return "action_questionnaire"
+        logger.info("ADD SLOT %s", str(question["_id"]))
+        
+        return validation_events + [
+            SlotSet("question_id", str(question["_id"])),
+            SlotSet(REQUESTED_SLOT, question["name"])
+        ]
     
-#     def run(
-#         self,
-#         dispatcher: CollectingDispatcher,
-#         tracker: Tracker,
-#         domain: Dict[Text, Any]
-#     ):
+    def validate_disease(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        logger.info("SLOT VALUE %s", slot_value)
+        return {"disease": slot_value}
 
-#         question_id = tracker.get_slot("question_id")
-#         if question_id is None:
-#             question = store.get_root_question()
-#             return [
-#                 FollowupAction(name=question["name"]),
-#                 SlotSet("questionnaire", True),
-#                 SlotSet("question_id", str(question["_id"])),
-#                 SlotSet("answer")
-#             ]
+class ActionExitQuestionnaire(Action):
 
-#         answer = tracker.get_slot("answer")
-#         store.save_answer(tracker.sender_id, question_id, answer)
-#         question = store.get_next_question(question_id, answer)
+    def name(self):
+        return "action_exit_questionnaire"
 
-#         if question is None:
-#             dispatcher.utter_message(response="utter_questionnaire_finished")
-#             return [
-#                 SlotSet("questionnaire", False),
-#                 SlotSet("question_id"),
-#                 SlotSet("answer")
-#             ]
-#         return [
-#             FollowupAction(name=question["name"]), 
-#             SlotSet("question_id", str(question["_id"])),
-#             SlotSet("answer")
-#         ]
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        return [ SlotSet("questionnaire", False) ]
