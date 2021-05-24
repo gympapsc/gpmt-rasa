@@ -1,38 +1,36 @@
 version: '2.0'
-
+config:
+  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
 intents:
-  - greet:
-      use_entities: true
-  - goodbye:
-      use_entities: true
-  - add_micturition:
-      use_entities: true
-  - deny:
-      use_entities: true
-  - affirm:
-      use_entities: true
-  - fill_micturition_time:
-      use_entities: true
-  - add_drinking:
-      use_entities: true
-  - fill_drinking_time:
-      use_entities: true
-  - fill_drinking_amount:
-      use_entities: true
-  - fill_disease:
-      use_entities: true
-  - fill_time:
-      use_entities: true
-
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- add_micturition:
+    use_entities: true
+- deny:
+    use_entities: true
+- affirm:
+    use_entities: true
+- fill_micturition_time:
+    use_entities: true
+- add_drinking:
+    use_entities: true
+- fill_drinking_time:
+    use_entities: true
+- fill_drinking_amount:
+    use_entities: true
+- fill_disease:
+    use_entities: true
+- fill_time:
+    use_entities: true
 entities:
-  - time
-  - volume
-  - disease
-
+- time
+- volume
+- disease
 slots:
   time:
     type: rasa.shared.core.slots.TextSlot
@@ -59,7 +57,11 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
-
+  questionnaire:
+    type: rasa.shared.core.slots.BooleanSlot
+    initial_value: true
+    auto_fill: true
+    influence_conversation: true
 responses:
   utter_greet:
   - text: Hallo ich bin dein chatbot
@@ -85,13 +87,11 @@ responses:
   - text: Unter welcher Krankheit leidest du?
   utter_questionnaire_finished:
   - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen.
-
 actions:
-  - action_add_micturition
-  - action_add_drinking
-  - validate_form_questionnaire
-  - action_exit_questionnaire
-
+- action_add_micturition
+- action_add_drinking
+- validate_form_questionnaire
+- action_exit_questionnaire
 forms:
   form_add_micturition:
     time:
@@ -108,3 +108,4 @@ forms:
     disease:
     - entity: disease
       type: from_entity
+e2e_actions: []
