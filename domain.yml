@@ -36,7 +36,7 @@ slots:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
-    influence_conversation: true
+    influence_conversation: false
   amount:
     type: rasa.shared.core.slots.AnySlot
     initial_value: null
@@ -46,12 +46,12 @@ slots:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
-    influence_conversation: true
+    influence_conversation: false
   question_id:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
-    influence_conversation: true
+    influence_conversation: false
   requested_slot:
     type: rasa.shared.core.slots.AnySlot
     initial_value: null

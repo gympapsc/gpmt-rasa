@@ -35,6 +35,9 @@ rules:
   - slot_was_set:
     - time: null
 - rule: Add drinking entry
+  condition:
+  - slot_was_set:
+    - questionnaire: false
   steps:
   - intent: add_drinking
   - action: form_add_drinking
