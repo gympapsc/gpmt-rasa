@@ -18,12 +18,14 @@ rules:
   - action: action_exit_questionnaire
   - slot_was_set:
     - questionnaire: false
-
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
 - rule: Add micturition entry
+  condition:
+  - slot_was_set:
+    - questionnaire: false
   steps:
   - intent: add_micturition
   - action: form_add_micturition
