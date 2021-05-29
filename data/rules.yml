@@ -77,10 +77,9 @@ rules:
   - active_loop: form_add_stress
   - slot_was_set:
     - requested_slot: null
-    - time
-    - stresslevel
+    - time: filled
+    - stresslevel: filled
   - action: action_add_stress
   - slot_was_set:
     - time: null
     - stresslevel: null
-
