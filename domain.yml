@@ -67,6 +67,7 @@ slots:
     influence_conversation: true
   stresslevel:
     type: float
+    influence_conversation: false
     min_value: 1
     max_value: 5
 responses:
@@ -92,6 +93,8 @@ responses:
   - text: Und wie viel?
   utter_ask_form_questionnaire_disease:
   - text: Unter welcher Krankheit leidest du?
+  utter_ask_form_add_stress_stresslevel:
+  - text: Auf einer Scala von 1 bis 5, wie gestresst fühlst du dich?
   utter_questionnaire_finished:
   - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen.
 actions:
