@@ -56,6 +56,7 @@ rules:
     - time: null
   - slot_was_set:
     - amount: null
+
 - rule: Greet user
   condition:
   - slot_was_set:
@@ -63,3 +64,21 @@ rules:
   steps:
   - intent: greet
   - action: utter_greet
+
+- rule: Add stress entry
+  condition:
+  - slot_was_set:
+    - questionnaire: false
+  steps:
+  - intent: fill_stress
+  - action: form_add_stress
+  - active_loop: form_add_stress
+  - slot_was_set:
+    - requested_slot: null
+    - time
+    - stresslevel
+  - action: action_add_stress
+  - slot_was_set:
+    - time: null
+    - stresslevel: null
+

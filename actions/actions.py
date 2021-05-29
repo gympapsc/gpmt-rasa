@@ -55,6 +55,27 @@ class ActionAddDrinking(Action):
             SlotSet(key="amount")
         ]
 
+class ActionAddStress(Action):
+
+    def name(self):
+        return "action_add_stress"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        date = tracker.get_slot("time")
+        stresslevel = tracker.get_slot("level")
+        store.create_stress(tracker.sender_id, date, stresslevel)
+
+        dispatcher.utter_message(response="utter_confirm")
+        return [
+            SlotSet(key="time"),
+            SlotSet(key="stresslevel")
+        ]
+
 class ActionInit(Action):
 
     def name(self):

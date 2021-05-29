@@ -24,8 +24,6 @@ class Store:
         self.mongodb = mongo_client["gpmt"]
 
     def dispatch(self, action, data):
-        # fjson_data = json.dumps(data)
-        # self.redis_client.publish(action, fjson_data)
         self.actionStream.add(action, data)
 
     def get_micturition(self, userid):
@@ -51,6 +49,13 @@ class Store:
             "user": userid,
             "date": date,
             "amount": amount
+        })
+    
+    def create_stress(self, userid, date, stresslevel):
+        self.dispatch("ADD_STRESS", {
+            "user": userid,
+            "date": date,
+            "level": stresslevel
         })
     
     def save_answer(self, userid, question_id, answer):

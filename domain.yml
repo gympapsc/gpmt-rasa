@@ -27,10 +27,13 @@ intents:
     use_entities: true
 - fill_time:
     use_entities: true
+- fill_stress:
+    use_entities: true
 entities:
 - time
 - volume
 - disease
+- stresslevel
 slots:
   time:
     type: rasa.shared.core.slots.TextSlot
@@ -62,6 +65,10 @@ slots:
     initial_value: true
     auto_fill: true
     influence_conversation: true
+  stresslevel:
+    type: float
+    min_value: 1
+    max_value: 5
 responses:
   utter_greet:
   - text: Hallo ich bin dein chatbot
@@ -104,6 +111,10 @@ forms:
       type: from_entity
     time:
     - entity: time
+      type: from_entity
+  form_add_stress:
+    stresslevel:
+    - entity: stresslevel
       type: from_entity
   form_questionnaire:
     disease:

@@ -64,7 +64,6 @@ nlu:
     - Ich habe [](time) [](volume) Wasser getrunken
     - [](volume) Wasser um [](time) getrunken
 
-
 - intent: fill_micturition_time
   examples: |
     - Um [](time) war meine Miktion
@@ -78,6 +77,17 @@ nlu:
 - intent: fill_time
   examples: |
     - [](time)
+
+- intent: fill_stress
+  examples: |
+    - Ich fühle mich [jetzt](time) [gestresst]{"entity": "stresslevel", "value": 5}
+    - Ich fühle mich [jetzt](time) [gelassen]{"entity": "stresslevel", "value": 1}
+    - Mir gehts [heute](time) [schlecht]{"entity": "stresslevel", "value": 5}
+    - Ich fühlte mich [gestern](time) [nicht gut]{"entity": "stresslevel", "value": 4}
+    - Ich mir gehts [jetzt](time) [ganz gut]{"entity": "stresslevel", "value": 3}
+    - Ich fühle mich [jetzt](time) [gut]{"entity": "stresslevel", "value": 2}
+    - Ich fühlte mich [gestern](time) [sehr gut]{"entity": "stresslevel", "value": 1}
+
 
 - intent: fill_drinking_amount
   examples: |
