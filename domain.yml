@@ -102,6 +102,7 @@ actions:
 - action_add_drinking
 - validate_form_questionnaire
 - action_exit_questionnaire
+- action_add_stress
 - action_init
 forms:
   form_add_micturition:
