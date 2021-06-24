@@ -12,8 +12,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-logger.info("TEST")
-
 store = Store()
 
 class ActionAddMicturition(Action):
@@ -29,7 +27,13 @@ class ActionAddMicturition(Action):
     ):
         date = tracker.get_slot("time")
         print(date)
-        store.create_micturition(tracker.sender_id, date)
+        dispatcher.utter_message(json_message={
+            "type": "ADD_MICTURITION",
+            "payload": {
+                "user": tracker.sender_id,
+                "date": date
+            }
+        })
 
         dispatcher.utter_message(response="utter_confirm")
         return [SlotSet(key="time")]
@@ -47,7 +51,14 @@ class ActionAddDrinking(Action):
     ):
         date = tracker.get_slot("time")
         amount = tracker.get_slot("amount")
-        store.create_drinking(tracker.sender_id, date, amount)
+        dispatcher.utter_message(json_message={
+            "type": "ADD_DRINKING",
+            "payload": {
+                "user": tracker.sender_id,
+                "date": date,
+                "amount": amount
+            }
+        })
 
         dispatcher.utter_message(response="utter_confirm")
         return [
@@ -67,8 +78,15 @@ class ActionAddStress(Action):
         domain: Dict[Text, Any]
     ):
         date = tracker.get_slot("time")
-        stresslevel = tracker.get_slot("level")
-        store.create_stress(tracker.sender_id, date, stresslevel)
+        stresslevel = tracker.get_slot("stresslevel")
+        dispatcher.utter_message(json_message={
+            "type": "ADD_STRESS",
+            "payload": {
+                "user": tracker.sender_id,
+                "date": date,
+                "level": stresslevel
+            }
+        })
 
         dispatcher.utter_message(response="utter_confirm")
         return [
@@ -83,12 +101,29 @@ class ActionInit(Action):
     
     def run(
         self, 
-        dispatch: CollectingDispatcher,
+        dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: Dict[Text, Any]
     ):
-        name = store.getUserName(tracker.sender_id)
+        name = store.get_user_name(tracker.sender_id)
 
         return [
             SlotSet(key="name", value=name)
         ]
+
+class ActionSignOut(Action):
+
+    def name(self):
+        return "action_signout"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        dispatcher.utter_message(json_message={
+            "type": "SIGNOUT_USER"
+        })
+
+        return []

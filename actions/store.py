@@ -38,43 +38,32 @@ class Store:
         })
         return entry
 
-    def create_micturition(self, userid, date):
-        self.dispatch("ADD_MICTURITION", {
-            "user": userid,
-            "date": date
-        })
-
-    def create_drinking(self, userid, date, amount):
-        self.dispatch("ADD_DRINKING", {
-            "user": userid,
-            "date": date,
-            "amount": amount
-        })
-    
-    def create_stress(self, userid, date, stresslevel):
-        self.dispatch("ADD_STRESS", {
-            "user": userid,
-            "date": date,
-            "level": stresslevel
-        })
-    
-    def save_answer(self, userid, question_id, answer):
-        self.dispatch("ANSWER_QUESTION", {
-            "user": userid,
-            "answer": answer,
-            "question": question_id
-        })
-
     def get_next_question(self, question_id, answer):
-        # curr_question = self.mongodb["questionnaire"].find_one({ "_id": ObjectId(question_id)})
+        curr_question = self.mongodb["questionnaire"].find_one({ "_id": ObjectId(question_id)})
+        
+        if curr_question["type"] == "number":
+            answer = int(answer)
 
-        # logger.debug(list(curr_question["next"]))
+        logger.debug(list(curr_question["next"]))
 
-        # for n in curr_question["next"]:
-        #     # TODO handle complex conditions
-        #     if n["condition"] == answer:
-        #         return self.mongodb["questionnaire"].find_one({ "_id": n["question"] })
-        pass
+        for n in curr_question["next"]:
+            question = self.mongodb["questionnaire"].find_one({ "_id": ObjectId(n) })
+            
+            if len(list(question["condition"])) == 0:
+                return question
+
+            for c in question["condition"]:
+                if c["type"] == "true" and answer:
+                    return question
+                if c["type"] == "false" and not answer:
+                    return question
+                if c["type"] == "eq" and c["value"] == answer:
+                    return question
+                if c["type"] == "gt" and int(c["value"]) < answer:
+                    return question
+                if c["type"] == "lt" and int(c["value"]) > answer:
+                    return question
+                    
 
     def get_root_question(self):
         return self.mongodb["questionnaire"].find_one({ "root": True })

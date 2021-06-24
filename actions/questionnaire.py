@@ -38,15 +38,41 @@ class ValidateQuestionnaireForm(FormValidationAction):
                 question = last_question
             else:
                 logger.info("LAST ANSWER %s", answer)
-                store.save_answer(tracker.sender_id, question_id, answer)
+                if last_question["type"] == "bool":
+                    if answer == "Ja":
+                        answer = True
+                    else:
+                        answer = False
+
+                dispatcher.utter_message(json_message={
+                    "type": "ANSWER_QUESTION",
+                    "payload": {
+                        "user": tracker.sender_id,
+                        "question": question_id,
+                        "answer": answer
+                    }
+                })
+                
                 question = store.get_next_question(question_id, answer)
+
                 if question is None:
                     return [
                         SlotSet(REQUESTED_SLOT, None)
                     ]
+                    
                 logger.info("NEXT QUESTION %s", question["name"])
 
         logger.info("ADD SLOT %s", str(question["_id"]))
+
+        if question["type"] == "radio":
+            dispatcher.utter_message(buttons=[
+                { "payload": option["text"], "title": option["text"] } 
+                for option in question.options
+            ])
+        elif question["type"] == "bool":
+            dispatcher.utter_message(buttons=[
+                { "payload": "Ja", "title": "Ja" }, { "payload": "Nein", "title": "Nein" }
+            ])
         
         return validation_events + [
             SlotSet("question_id", str(question["_id"])),
