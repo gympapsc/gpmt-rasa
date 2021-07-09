@@ -18,15 +18,15 @@ jobs:
     - name: ACR login
       uses: azure/docker-login@v1
       with:
-        login-server: ${{ env.REGISTRY_USERNAME }}.azurecr.io
+        login-server: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
             
     - name: rasa action container build
-      run: docker build ./actions -t ${{ env.REGISTRY_USERNAME }}.azurecr.io/gpmt-rasa-actions
+      run: docker build ./actions -t ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/gpmt-rasa-actions
         
     - name: rasa action container push
-      run: docker push ${{ env.REGISTRY_USERNAME }}.azurecr.io/gpmt-rasa-actions
+      run: docker push ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/gpmt-rasa-actions
     
     # train-test:
     #     name: Train and test rasa bot
