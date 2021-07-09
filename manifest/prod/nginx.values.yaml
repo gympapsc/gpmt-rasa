@@ -1,22 +1,20 @@
-# defaultBackend:
-#    nodeSelector:
-#        beta.kubernetes.io/os: linux
-
-# this can be specified in a seperate file
+defaultBackend:
+    nodeSelector:
+        beta.kubernetes.io/os: linux
 
 controller:
-#    replicaCount: 2
-#    nodeSelector:
-#        beta.kubernetes.io/os: linux
+    replicaCount: 2
+    nodeSelector:
+        beta.kubernetes.io/os: linux
     
-#    admissionWebhooks:
-#        patch:
-#            nodeSelector:
-#                beta.kubernetes.io/os: linux
+    admissionWebhooks:
+        patch:
+            nodeSelector:
+                beta.kubernetes.io/os: linux
 
     service:
         # aquired through azure public ip service
-        loadBalancerIP: "13.74.217.11"
+        loadBalancerIP: "20.105.180.169"
         annotations:
             service.beta.kubernetes.io/azure-dns-label-name: "rasa-gpmt"
 

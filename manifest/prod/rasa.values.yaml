@@ -1,13 +1,13 @@
 ingress:
     hosts:
-    - host: rasax-gpmt.northeurope.cloudapp.azure.com
+    - host: rasax-gpmt.westeurope.cloudapp.azure.com
       paths:
       - /
     
     tls:
     - secretName: rasa-x-tls
       hosts:
-      - rasax-gpmt.northeurope.cloudapp.azure.com
+      - rasax-gpmt.westeurope.cloudapp.azure.com
 
     annotations:
         kubernetes.io/ingress.class: nginx 

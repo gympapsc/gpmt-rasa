@@ -9,10 +9,8 @@ rasa:
         rest:
 
 app:
-    name: "hakrac/gpmt-rasa-actions"
-    # name: "gpmtregistry.azurecr.io/gpmt-rasa-actions"
+    name: "gpmtcontainerregistry.azurecr.io/gpmt-rasa-actions"
     tag: "latest"
 
 nginx:
     enabled: false
-
