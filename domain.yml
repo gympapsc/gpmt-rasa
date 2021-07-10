@@ -1,34 +1,19 @@
-version: '2.0'
-config:
-  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- greet:
-    use_entities: true
-- goodbye:
-    use_entities: true
-- add_micturition:
-    use_entities: true
-- deny:
-    use_entities: true
-- affirm:
-    use_entities: true
-- fill_micturition_time:
-    use_entities: true
-- add_drinking:
-    use_entities: true
-- fill_drinking_time:
-    use_entities: true
-- fill_drinking_amount:
-    use_entities: true
-- fill_disease:
-    use_entities: true
-- fill_time:
-    use_entities: true
-- fill_stress:
-    use_entities: true
+- greet
+- goodbye
+- add_micturition
+- deny
+- affirm
+- fill_micturition_time
+- add_drinking
+- fill_drinking_time
+- fill_drinking_amount
+- fill_disease
+- fill_time
+- fill_stress
 entities:
 - time
 - volume
@@ -36,40 +21,34 @@ entities:
 - stresslevel
 slots:
   time:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
+    type: text
     influence_conversation: false
   amount:
-    type: rasa.shared.core.slots.AnySlot
-    initial_value: null
-    auto_fill: true
+    type: float
     influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
   disease:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
+    type: text
     influence_conversation: false
   question_id:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
+    type: text
     influence_conversation: false
   requested_slot:
-    type: rasa.shared.core.slots.AnySlot
-    initial_value: null
-    auto_fill: true
+    type: any
     influence_conversation: false
   questionnaire:
-    type: rasa.shared.core.slots.BooleanSlot
+    type: bool
     initial_value: true
-    auto_fill: true
     influence_conversation: true
   stresslevel:
     type: float
     influence_conversation: false
-    min_value: 1
-    max_value: 5
+    max_value: 5.0
+    min_value: 1.0
+  incontience:
+    type: text
+    influence_conversation: false
 responses:
   utter_greet:
   - text: Hallo ich bin dein chatbot
@@ -79,6 +58,7 @@ responses:
   - text: Hilft dir das weiter?
   utter_goodbye:
   - text: Tschüss
+  - text: Auf Wiedersehen
   utter_iamabot:
   - text: Ich bin deine Hilfe
   utter_confirm:
@@ -91,19 +71,26 @@ responses:
   - text: Wann genau hast du Etwas getrunken?
   utter_ask_form_add_drinking_amount:
   - text: Und wie viel?
+  - text: Wie viel hast du getrunken?
   utter_ask_form_questionnaire_disease:
   - text: Unter welcher Krankheit leidest du?
-  utter_ask_form_add_stress_stresslevel:
-  - text: Auf einer Scala von 1 bis 5, wie gestresst fühlst du dich?
   utter_questionnaire_finished:
-  - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen.
+  - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst
+      du mir das einfach sagen.
+  utter_ask_form_add_stress_stresslevel:
+  - text: Auf einer Skala von 1 bis 5 wie fühlst du dich?
+  utter_ask_form_add_stress_time:
+  - text: Und wann?
+  utter_ask_form_questionnaire_incontience:
+  - text: Leidest du unter Inkontienz?
 actions:
 - action_add_micturition
 - action_add_drinking
+- action_add_stress
 - validate_form_questionnaire
 - action_exit_questionnaire
-- action_add_stress
 - action_init
+- action_signout
 forms:
   form_add_micturition:
     time:
@@ -120,8 +107,12 @@ forms:
     stresslevel:
     - entity: stresslevel
       type: from_entity
+    time:
+    - entity: time
+      type: from_entity
   form_questionnaire:
     disease:
     - entity: disease
       type: from_entity
-e2e_actions: []
+    incontience:
+    - type: from_text

@@ -18,10 +18,6 @@ rules:
   - action: action_exit_questionnaire
   - slot_was_set:
     - questionnaire: false
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
 - rule: Add micturition entry
   condition:
   - slot_was_set:
@@ -52,13 +48,14 @@ rules:
   - slot_was_set:
     - time: filled
   - slot_was_set:
+    - amount: filled
+  - slot_was_set:
     - amount: null
   - action: action_add_drinking
   - slot_was_set:
     - time: null
   - slot_was_set:
     - amount: null
-
 - rule: Greet user
   condition:
   - slot_was_set:
@@ -66,7 +63,6 @@ rules:
   steps:
   - intent: greet
   - action: utter_greet
-
 - rule: Add stress entry
   condition:
   - slot_was_set:
@@ -75,11 +71,23 @@ rules:
   - intent: fill_stress
   - action: form_add_stress
   - active_loop: form_add_stress
+  - active_loop: null
   - slot_was_set:
     - requested_slot: null
+  - slot_was_set:
     - time: filled
+  - slot_was_set:
     - stresslevel: filled
   - action: action_add_stress
   - slot_was_set:
     - time: null
+  - slot_was_set:
     - stresslevel: null
+- rule: Sign Out
+  condition:
+  - slot_was_set:
+    - questionnaire: false
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_signout
