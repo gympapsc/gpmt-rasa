@@ -27,7 +27,6 @@ nlu:
 - intent: affirm
   examples: |
     - ja
-    - jaaaaa
     - na klarrrrr
     - natürlich
     - hört sich gut an
