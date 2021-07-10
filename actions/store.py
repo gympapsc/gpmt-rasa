@@ -1,6 +1,3 @@
-import redis
-import os
-import threading
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import json
@@ -12,19 +9,10 @@ logger = logging.getLogger(__name__)
 
 class Store:
     def __init__(self):
-        self.actionStream = RedisStream(
-            "actions",
-            "gpmt-rasa-actions",
-            os.environ["HOSTNAME"]
-        )
-
         mongo_client = MongoClient(
-            "mongodb://gpmt-mongodb.default.svc.cluster.local"
+            "mongodb://gpmtdb:aD3OP3ay1EXrS8NfT5Qs5kyZlb9FXMK9jcMfaefv48h84pT9RHrQjoFgSTnu9Fh8niMUNTysETPQTbzQThUADg==@gpmtdb.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@gpmtdb@"
         )
         self.mongodb = mongo_client["gpmt"]
-
-    def dispatch(self, action, data):
-        self.actionStream.add(action, data)
 
     def get_micturition(self, userid):
         entry = self.mongodb["micturition"].find({
@@ -85,49 +73,3 @@ class Store:
 
     # def delete_drinking(self, userid="", drinkid=""):
     #     pass
-
-class RedisStream:
-
-    def __init__(self, name, groupname, consumername):
-        self.streamname = name
-        self.groupname = groupname
-        self.consumername = consumername
-
-        self.r = redis.Redis(host="gpmt-redis.default.svc.cluster.local")
-        try:
-            self.r.xgroup_create(name, groupname, id="$", mkstream=True)
-        except:
-            pass
-
-    def on(self, fn):
-        def worker(r, streamname, groupname, consumername, fn):
-            while True:
-                messages = dict(
-                    r.xreadgroup(
-                        groupname, 
-                        consumername, 
-                        { streamname: ">", }, 
-                        block=0, 
-                        noack=True
-                    )
-                )[bytes(streamname, "utf-8")]
-                for message in messages:
-                    fn(message[0], message[1])
-                    r.xack(streamname, groupname, message[0])
-
-        x = threading.Thread(target=worker, args=(
-            self.r,
-            self.streamname,
-            self.groupname,
-            self.consumername,
-            fn
-        ), daemon=True)
-        x.start()
-
-        return fn
-
-    def add(self, event, message):
-        self.r.xadd(self.streamname, { 
-            "type": event,
-            "payload": json.dumps(message)
-        })

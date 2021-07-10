@@ -14,9 +14,9 @@ ingress:
         cert-manager.io/issuer: letsencrypt
 rasax:
     persistence:
-        size: "16Gi"
+        size: "8Gi"
     
 postgresql:
     persistence:
-        size: "32Gi"
+        size: "8Gi"
 
