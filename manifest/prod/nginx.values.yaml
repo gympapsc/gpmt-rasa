@@ -3,7 +3,7 @@ defaultBackend:
         beta.kubernetes.io/os: linux
 
 controller:
-    replicaCount: 2
+    replicaCount: 1
     nodeSelector:
         beta.kubernetes.io/os: linux
     
@@ -14,7 +14,7 @@ controller:
 
     service:
         # aquired through azure public ip service
-        loadBalancerIP: "20.105.180.169"
+        loadBalancerIP: "20.101.119.197"
         annotations:
             service.beta.kubernetes.io/azure-dns-label-name: "rasax-gpmt"
 
