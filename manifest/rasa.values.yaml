@@ -2,16 +2,11 @@ rasax:
     initialUser:
         username: "gpmt"
         password: "gympap?password"
-    
 
 rasa:
     version: "2.6.0"
     additionalChannelCredentials:
         rest:
-
-app:
-    name: "gpmtcontainerregistry.azurecr.io/gpmt-rasa-actions"
-    tag: "latest"
 
 nginx:
     enabled: false

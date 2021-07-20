@@ -91,6 +91,14 @@ jobs:
           helm repo add jetstack https://charts.jetstack.io
           helm repo update
 
+      - name: Create k8s cosmos secret
+        uses: azure/k8s-create-secret@v1
+        with:
+          secret-type: 'generic'
+          arguments:  --from-literal=url=${{ secrets.COSMOS_URL }}
+          secret-name: cosmosdb
+          namespace: "default"
+
       - name: Deploy nginx ingress
         run: |
           helm upgrade ingress-rasa ingress-nginx/ingress-nginx \
@@ -100,12 +108,12 @@ jobs:
       - name: Deploy certificate manager
         run: |
           helm upgrade --install cert-manager jetstack/cert-manager \
-          --values ./manifest/cert-manager.values.yaml \
+          --values ./manifest/prod/cert-manager.values.yaml \
           --set installCRDs=true \
           --namespace cert-manager --create-namespace 
 
       - name: Deploy Letsencrypt CA issuer
-        run: kubectl apply -f manifest/issuer.yaml -n ${{ env.NAMESPACE }} 
+        run: kubectl apply -f manifest/prod/issuer.yaml -n ${{ env.NAMESPACE }} 
 
       - name: Deploy Rasa X
         run: |

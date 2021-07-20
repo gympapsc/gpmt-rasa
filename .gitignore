@@ -1,3 +1,4 @@
 gpmtenv/
 **/__pycache__/
 models/
+manifest/test/

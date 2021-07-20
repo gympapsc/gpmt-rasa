@@ -39,10 +39,11 @@ class ValidateQuestionnaireForm(FormValidationAction):
             else:
                 logger.info("LAST ANSWER %s", answer)
                 if last_question["type"] == "bool":
-                    if answer == "Ja":
+                    if answer.lower() == "ja":
                         answer = True
                     else:
                         answer = False
+
 
                 dispatcher.utter_message(json_message={
                     "type": "ANSWER_QUESTION",
