@@ -27,6 +27,13 @@ app:
            name: cosmosdb
            key: url
 
+rasa:
+    versions:
+        rasaWorkers:
+            resoures:
+                requests:
+                    memory: "1Gi"
+
 rasax:
     persistence:
         size: "8Gi"
