@@ -68,7 +68,7 @@ class ValidateQuestionnaireForm(FormValidationAction):
         if question["type"] == "radio":
             dispatcher.utter_message(buttons=[
                 { "payload": option["text"], "title": option["text"] } 
-                for option in question.options
+                for option in question["options"]
             ])
         elif question["type"] == "bool":
             dispatcher.utter_message(buttons=[
