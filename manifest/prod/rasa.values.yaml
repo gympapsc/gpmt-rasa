@@ -30,7 +30,7 @@ app:
 rasa:
     versions:
         rasaWorkers:
-            resoures:
+            resources:
                 requests:
                     memory: "1Gi"
 
