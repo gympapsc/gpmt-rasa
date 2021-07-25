@@ -72,19 +72,25 @@ nlu:
 - intent: fill_time
   examples: |
     - [](time)
+    - Seit [2](ms_timerange) Jahren
+    - Ich leide seit [4](ms_timerange) Jahren unter MS
 - intent: fill_drinking_amount
   examples: |
     - Ich habe ungefähr [](volume) getrunken
     - So etwa [](volume)
     - [](volume)
     - [500](volume) milliliter
-- intent: fill_disease
-  examples: |
-    - Ich leide unter [muliples sklerose](disease)
-    - Ich leide unter [ms](disease)
 - intent: fill_stress
   examples: |
     - Ich fühle mich wie [1](stresslevel)
+- intent: fill_health_apps
+  examples: |
+    - Ich nutze [3](health_apps) Gesundheitsapps
+    - Ich nutze [keine](health_apps) Gesundheitsapps
+    - Ich benutze [0](health_apps) Gesundheitsapps
+- intent: fill_drugs
+  examples: |
+    - Ich nehme regelmäßig [Kortison](drugs) ein
 - regex: greet
   examples: |
     - H(.)*
