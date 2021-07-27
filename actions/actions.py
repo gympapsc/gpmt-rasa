@@ -5,7 +5,6 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import FollowupAction, SlotSet, AllSlotsReset
 from rasa_sdk.executor import CollectingDispatcher
-import datetime
 
 from actions.store import Store
 
