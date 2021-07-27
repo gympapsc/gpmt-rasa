@@ -15,13 +15,7 @@ intents:
     use_entities: true
 - affirm:
     use_entities: true
-- fill_micturition_time:
-    use_entities: true
 - add_drinking:
-    use_entities: true
-- fill_drinking_time:
-    use_entities: true
-- fill_drinking_amount:
     use_entities: true
 - fill_time:
     use_entities: true
@@ -307,9 +301,6 @@ forms:
     required_slots:
       stresslevel:
       - entity: stresslevel
-        type: from_entity
-      time:
-      - entity: time
         type: from_entity
   form_questionnaire:
     required_slots:

@@ -53,6 +53,7 @@ nlu:
     - Ich war auf dem Pot
     - Ich war [gerade](time) auf dem Pot
     - Ich war um [12 Uhr](time) auf Toilette
+    - Um [](time) war meine Miktion
 - intent: add_drinking
   examples: |
     - Ich habe etwas getrunken
@@ -61,28 +62,27 @@ nlu:
     - Kaffee
     - Ich habe [](time) [](volume) Wasser getrunken
     - [](volume) Wasser um [](time) getrunken
-- intent: fill_micturition_time
-  examples: |
-    - Um [](time) war meine Miktion
-    - Gestern um [12 Uhr](time)
-- intent: fill_drinking_time
-  examples: |
     - Ich habe das letzte mal [](time) Etwas getrunken
-    - So gegen [](time)
-- intent: fill_time
-  examples: |
-    - [](time)
-    - Seit [2](ms_timerange) Jahren
-    - Ich leide seit [4](ms_timerange) Jahren unter MS
-- intent: fill_drinking_amount
-  examples: |
     - Ich habe ungefähr [](volume) getrunken
     - So etwa [](volume)
     - [](volume)
     - [500](volume) milliliter
+    - Ich habe [](time) [](volume) getrunken
+    - [](time) habe ich [](volume) getrunken
+- intent: fill_time
+  examples: |
+    - Gestern um [12 Uhr](time)
+    - So gegen [](time)
+    - [](time)
+    - Seit [2](ms_timerange) Jahren
+    - Ich leide seit [4](ms_timerange) Jahren unter MS
 - intent: fill_stress
   examples: |
-    - Ich fühle mich wie [1](stresslevel)
+    - Ich fühle [wohl](stresslevel)
+    - Ich fühle mich [gut](stresslevel)
+    - Ich fühle mich [sehr gut](stresslevel)
+    - Ich fühle mich [schlecht](stresslevel)
+    - Ich bin [gestresst](stresslevel)
 - intent: fill_health_apps
   examples: |
     - Ich nutze [3](health_apps) Gesundheitsapps
