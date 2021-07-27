@@ -77,7 +77,7 @@ class ActionAddStress(Action):
         tracker: Tracker,
         domain: Dict[Text, Any]
     ):
-        date = datetime.now()
+        date = datetime.now().isoformat()
         stresslevel = tracker.get_slot("stresslevel")
         dispatcher.utter_message(json_message={
             "type": "ADD_STRESS",
