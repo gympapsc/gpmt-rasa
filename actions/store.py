@@ -28,7 +28,7 @@ class Store:
         return entry
 
     def get_next_question(self, question_id, answer):
-        curr_question = self.mongodb["Questionnaire"].find_one({ "_id": ObjectId(question_id)})
+        curr_question = self.mongodb["Questionnaire"].find_one({ "_id": ObjectId(question_id) })
         
         if curr_question["type"] == "number":
             answer = int(answer)

@@ -1,4 +1,4 @@
-on: [release, push]
+on: [release]
 
 name: Deployment to AKS
 
@@ -103,24 +103,23 @@ jobs:
         run: |
           helm upgrade ingress-rasa ingress-nginx/ingress-nginx \
           --install \
-          --values ./manifest/prod/nginx.values.yaml -n ${{ env.NAMESPACE }}
+          --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }}
         
       - name: Deploy certificate manager
         run: |
           helm upgrade --install cert-manager jetstack/cert-manager \
-          --values ./manifest/prod/cert-manager.values.yaml \
+          --values ./manifest/cert-manager.values.yaml \
           --set installCRDs=true \
           --namespace cert-manager --create-namespace 
 
       - name: Deploy Letsencrypt CA issuer
-        run: kubectl apply -f manifest/prod/issuer.yaml -n ${{ env.NAMESPACE }} 
+        run: kubectl apply -f manifest/issuer.yaml -n ${{ env.NAMESPACE }} 
 
       - name: Deploy Rasa X
         run: |
           helm upgrade rasa-x rasa-x/rasa-x \
           --install \
           --namespace ${{ env.NAMESPACE }} \
-          --values ./manifest/rasa.values.yaml \
-          --values ./manifest/prod/rasa.values.yaml
+          --values ./manifest/rasa.values.yaml
           #--set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }}
 

@@ -2,3 +2,9 @@ gpmtenv/
 **/__pycache__/
 models/
 manifest/test/
+nginx-*
+db/
+certs/
+.config/
+auth/
+logs/
