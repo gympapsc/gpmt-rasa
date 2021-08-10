@@ -1,4 +1,4 @@
-on: [release]
+on: [release, push]
 
 name: Deployment to AKS
 
