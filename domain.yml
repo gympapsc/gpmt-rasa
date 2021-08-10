@@ -1,53 +1,188 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- greet
-- goodbye
-- add_micturition
-- deny
-- affirm
-- fill_micturition_time
-- add_drinking
-- fill_drinking_time
-- fill_drinking_amount
-- fill_disease
-- fill_time
-- fill_stress
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- add_micturition:
+    use_entities: true
+- deny:
+    use_entities: true
+- affirm:
+    use_entities: true
+- add_drinking:
+    use_entities: true
+- fill_time:
+    use_entities: true
+- fill_stress:
+    use_entities: true
+- fill_health_apps:
+    use_entities: true
+- fill_drugs:
+    use_entities: true
 entities:
 - time
 - volume
-- disease
 - stresslevel
+- health_apps
+- drugs
+- ms_timerange
 slots:
   time:
-    type: text
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
   amount:
-    type: float
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
     max_value: 1.0
     min_value: 0.0
   disease:
-    type: text
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  diabetes:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  digestion_disorder:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  devices:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  fitness_tracker:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
   question_id:
-    type: text
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
   requested_slot:
-    type: any
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
+  health_apps:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+    max_value: 10.0
+    min_value: 0.0
   questionnaire:
-    type: bool
+    type: rasa.shared.core.slots.BooleanSlot
     initial_value: true
+    auto_fill: true
     influence_conversation: true
   stresslevel:
-    type: float
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
     max_value: 5.0
     min_value: 1.0
-  incontience:
-    type: text
+  incontinence:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  incontinence_severity:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  drugs:
+    type: rasa.shared.core.slots.ListSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  micturition_diary:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_timerange:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_condition:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_type:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_vision:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_walking:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_motorics:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_spactics:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_numbness:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_paralysis:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_disphagia:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_speech:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  ms_fatigue:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  work:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
     influence_conversation: false
 responses:
   utter_greet:
@@ -73,16 +208,73 @@ responses:
   - text: Und wie viel?
   - text: Wie viel hast du getrunken?
   utter_ask_form_questionnaire_disease:
-  - text: Unter welcher Krankheit leidest du?
+  - text: Leidest du unter Multipler Sklerose?
   utter_questionnaire_finished:
-  - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst
-      du mir das einfach sagen.
+  - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen.
   utter_ask_form_add_stress_stresslevel:
   - text: Auf einer Skala von 1 bis 5 wie fühlst du dich?
   utter_ask_form_add_stress_time:
   - text: Und wann?
-  utter_ask_form_questionnaire_incontience:
-  - text: Leidest du unter Inkontienz?
+  utter_ask_form_questionnaire_incontinence:
+  - text: Leidest du unter Inkontinenz?
+  - text: Bist du von Inkontinenz betroffen?
+  utter_ask_form_questionnaire_digestion_disorder:
+  - text: Hast du häufig Verdauungsstörungen?
+  - text: Leidest du oft unter Verdauungsstörungen?
+  utter_ask_form_questionnaire_diabetes:
+  - text: Hast du Diabetes?
+  utter_ask_form_questionnaire_devices:
+  - text: Welches Endgerät benutzt du am meisten?
+  utter_ask_form_questionnaire_fitness_tracker:
+  - text: Benutzt du ein Fitnessuhr mit Pulsmesser regelmäßig?
+  utter_ask_form_questionnaire_health_apps:
+  - text: Wie viele Gesundheitsapps benutzt du aktuell?
+  utter_ask_form_questionnaire_ms_timerange:
+  - text: Seit wie vielen Jahren leidest du unter MS?
+  utter_ask_form_questionnaire_ms_condition:
+  - text: Wie schätzt du deine aktuelle Gesundheitslage ein?
+  - text: Und wie schätzt du deine aktuelle Gesundheitslage ein?
+  utter_ask_form_questionnaire_ms_type:
+  - text: Treten die MS Symptome in Schüben auf?
+  utter_ask_form_questionnaire_ms_vision:
+  - text: Bist du durch deine Erkrankung seheingeschränkt?
+  - text: Inwiefern ist deine Sicht durch MS eingeschränkt?
+  - text: Wie stark seheingeschränkt bist du?
+  utter_ask_form_questionnaire_ms_walking:
+  - text: Bist du in Laufen eingeschränkt?
+  - text: Wie stark bist du beim Laufen durch MS eingeschränkt?
+  utter_ask_form_questionnaire_ms_motorics:
+  - text: Ist die Motorik deiner Hände eingeschränkt?
+  utter_ask_form_questionnaire_ms_spactics:
+  - text: Leidest du unter Spastiken?
+  utter_ask_form_questionnaire_ms_numbness:
+  - text: Hast du mit Taubheit an den Gliedmaßen zu kämpfen?
+  - text: Leidest du unter Taubheitsgefühl an den Gliedmaßen?
+  utter_ask_form_questionnaire_ms_paralysis:
+  - text: Gehören Lähmungen zu den Symptomen deiner MS?
+  utter_ask_form_questionnaire_ms_disphagia:
+  - text: Und hast du Schluckstörungen?
+  - text: Leidest du infolge der MS unter Schluckstörungen?
+  utter_ask_form_questionnaire_ms_speech:
+  - text: Gehören Sprechstörungen zu den Folgen deiner MS?
+  utter_ask_form_questionnaire_ms_fatigue:
+  - text: Leidest du oft unter Müdigkeit in Tagesverlauf?
+  - text: Fühlst du dich im Alltag oft übermäßig erschöpft?
+  utter_ask_form_questionnaire_concentration_disorder:
+  - text: Leidest du dadurch oft unter Konzentrationsschwierigkeit?
+  utter_ask_form_questionnaire_work:
+  - text: Wie viel arbeitest du oder gehst du zur Schule?
+  utter_ask_form_questionnaire_work_incontinence:
+  - text: Schränkt dich deine Inkontinenz im Alltag ein?
+  utter_ask_form_questionnaire_work_fatigue:
+  - text: Fühlst du dich durch deine Müdigkeit im Alltag eingeschränkt?
+  utter_ask_form_questionnaire_drugs:
+  - text: Welche Mediakmente nimmst du ein?
+  utter_ask_form_questionnaire_incontinence_severity:
+  - text: Unter welcher Form der Inkontinenz leidest du?
+  - text: Von welcher Form der Inkontienz bist du betroffen?
+  utter_ask_form_questionnaire_micturition_diary:
+  - text: Hast du schon einmal ein Miktionstagebuch geführt?
 actions:
 - action_add_micturition
 - action_add_drinking
@@ -93,26 +285,76 @@ actions:
 - action_signout
 forms:
   form_add_micturition:
-    time:
-    - entity: time
-      type: from_entity
+    required_slots:
+      time:
+      - entity: time
+        type: from_entity
   form_add_drinking:
-    amount:
-    - entity: volume
-      type: from_entity
-    time:
-    - entity: time
-      type: from_entity
+    required_slots:
+      amount:
+      - entity: volume
+        type: from_entity
+      time:
+      - entity: time
+        type: from_entity
   form_add_stress:
-    stresslevel:
-    - entity: stresslevel
-      type: from_entity
-    time:
-    - entity: time
-      type: from_entity
+    required_slots:
+      stresslevel:
+      - entity: stresslevel
+        type: from_entity
   form_questionnaire:
-    disease:
-    - entity: disease
-      type: from_entity
-    incontience:
-    - type: from_text
+    required_slots:
+      devices:
+      - type: from_text
+      diabetes:
+      - type: from_text
+      digestion_disorder:
+      - type: from_text
+      disease:
+      - type: from_text
+      drugs:
+      - entity: drugs
+        type: from_entity
+      fitness_tracker:
+      - type: from_text
+      health_apps:
+      - entity: health_apps
+        type: from_entity
+      incontinence:
+      - type: from_text
+      incontinence_severity:
+      - type: from_text
+      micturition_diary:
+      - type: from_text
+      ms_condition:
+      - type: from_text
+      ms_disphagia:
+      - type: from_text
+      ms_fatigue:
+      - type: from_text
+      ms_motorics:
+      - type: from_text
+      ms_numbness:
+      - type: from_text
+      ms_paralysis:
+      - type: from_text
+      ms_spactics:
+      - type: from_text
+      ms_speech:
+      - type: from_text
+      ms_timerange:
+      - entity: ms_timerange
+        type: from_entity
+      ms_type:
+      - type: from_text
+      ms_vision:
+      - type: from_text
+      ms_walking:
+      - type: from_text
+      work:
+      - type: from_text
+      work_fatigue:
+      - type: from_text
+      work_incontinence:
+      - type: from_text
+e2e_actions: []

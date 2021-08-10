@@ -42,6 +42,11 @@ rasa:
     version: "2.6.0"
     additionalChannelCredentials:
         rest:
+    versions:
+      rasaWorkers:
+          resources:
+              requests:
+                  memory: "1Gi"
 
 nginx:
     enabled: false

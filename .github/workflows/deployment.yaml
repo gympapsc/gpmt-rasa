@@ -97,7 +97,7 @@ jobs:
           secret-type: 'generic'
           arguments:  --from-literal=url=${{ secrets.COSMOS_URL }}
           secret-name: cosmosdb
-          namespace: "default"
+          namespace: "rasa"
 
       - name: Deploy nginx ingress
         run: |
