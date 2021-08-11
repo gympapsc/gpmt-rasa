@@ -150,7 +150,7 @@ services:
 
   app:
     restart: always
-    image: "gpmtcontainerregistry.azurecr.io/gpmt-rasa-actions:latest"
+    image: "hakrac/gpmt-rasa:latest"
     expose:
       - "5055"
     depends_on:
