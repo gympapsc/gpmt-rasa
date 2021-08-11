@@ -150,7 +150,9 @@ services:
 
   app:
     restart: always
-    image: "hakrac/gpmt-rasa:latest"
+    build:
+        dockerfile: Dockerfile
+        context: ./actions
     expose:
       - "5055"
     depends_on:
