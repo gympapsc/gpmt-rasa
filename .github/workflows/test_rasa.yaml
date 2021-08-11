@@ -16,6 +16,5 @@ jobs:
         login-server: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-    - run: docker pull gpmtcontainerregistry.azurecr.io/gpmt-rasa-actions:latest
     - name: Run `rasa`
       run: docker-compose -f docker-compose.yml up
