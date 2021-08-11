@@ -22,4 +22,4 @@ jobs:
         wget -qO nginx-config-files/ssl.conf.template https://storage.googleapis.com/rasa-x-releases/0.42.0/nginx-config-files/ssl.conf.template 
         wget -qO nginx-config-files/rasax.nginx.template https://storage.googleapis.com/rasa-x-releases/0.42.0/nginx-config-files/rasax.nginx.template 
     - name: Run `rasa`
-      run: docker-compose -f docker-compose.yml up
+      run: sudo docker-compose -f docker-compose.yml up
