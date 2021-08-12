@@ -18,7 +18,7 @@ pipeline:
     epochs: 100
     constrain_similarities: true
   - name: "DucklingEntityExtractor"
-    url: "http://localhost:8000"
+    url: "http://duckling:8000"
     dimensions: ["time", "number", "amount-of-money", "distance", "quantity", "volume"]
     locale: "de_DE"
     timezone: "Europe/Berlin"
