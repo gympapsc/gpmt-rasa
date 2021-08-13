@@ -6,8 +6,6 @@ COPY credentials.yml .
 COPY domain.yml .
 COPY endpoints.yml .
 
-RUN ls
-
 RUN rasa train
 
 EXPOSE 5005
