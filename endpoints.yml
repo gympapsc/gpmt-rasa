@@ -1,1 +1,4 @@
 # This file contains the different endpoints your bot can use.
+
+action_endpoint:
+  url: "http://app:5055/webhook"

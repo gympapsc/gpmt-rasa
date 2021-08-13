@@ -66,6 +66,69 @@ class ActionAddDrinking(Action):
             SlotSet(key="amount")
         ]
 
+class ActionAddNutrition(Action):
+
+    def name(self):
+        return "action_add_nutrition"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        date = tracker.get_slot("time")
+        mass = tracker.get_slot("mass")
+        nutrition = tracker.get_slot("nutrition")
+        dispatcher.utter_message(json_message={
+            "type": "ADD_NUTRITION",
+            "payload": {
+                "user": tracker.sender_id,
+                "date": date,
+                "mass": mass,
+                "type": nutrition
+            }
+        })
+
+        dispatcher.utter_message(response="utter_confirm")
+        return [
+            SlotSet(key="time"), 
+            SlotSet(key="mass"),
+            SlotSet(key="nutrition")
+        ]
+
+class ActionAddMedication(Action):
+
+    def name(self):
+        return "action_add_medication"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        date = tracker.get_slot("time")
+        mass = tracker.get_slot("mass")
+        substance = tracker.get_slot("substance")
+        dispatcher.utter_message(json_message={
+            "type": "ADD_MEDICATION",
+            "payload": {
+                "user": tracker.sender_id,
+                "date": date,
+                "substance": substance,
+                "mass": mass
+            }
+        })
+
+        dispatcher.utter_message(response="utter_confirm")
+        return [
+            SlotSet(key="time"), 
+            SlotSet(key="mass"),
+            SlotSet(key="substance")
+        ]
+
+
 class ActionAddStress(Action):
 
     def name(self):

@@ -281,6 +281,8 @@ actions:
 - action_add_stress
 - validate_form_questionnaire
 - action_exit_questionnaire
+- action_add_nutrition
+- action_add_medication
 - action_init
 - action_signout
 forms:
