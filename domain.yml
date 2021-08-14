@@ -28,11 +28,23 @@ intents:
 entities:
 - time
 - volume
+- quantity
 - stresslevel
 - health_apps
 - drugs
 - ms_timerange
+- drinking
 slots:
+  substance:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  mass:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
   time:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -56,6 +68,11 @@ slots:
     auto_fill: true
     influence_conversation: false
   digestion_disorder:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  drinking:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -186,7 +203,7 @@ slots:
     influence_conversation: false
 responses:
   utter_greet:
-  - text: Hallo ich bin dein chatbot
+  - text: Hallo, ich bin dein chatbot
   utter_questionnaire_start:
   - text: Ich möchte dir ein paar Fragen stellen.
   utter_did_that_help:
@@ -207,6 +224,13 @@ responses:
   utter_ask_form_add_drinking_amount:
   - text: Und wie viel?
   - text: Wie viel hast du getrunken?
+  utter_ask_form_add_nutrition_mass:
+  - text: Und, wie viel?
+  - text: Wie viel hast du gegessen?
+  utter_ask_form_add_nutrition_nutrition:
+  - text: Was hast du gegessen?
+  utter_ask_form_add_nutrition_time:
+  - text: Und, wann hast du gegessen?
   utter_ask_form_questionnaire_disease:
   - text: Leidest du unter Multipler Sklerose?
   utter_questionnaire_finished:
@@ -298,6 +322,31 @@ forms:
         type: from_entity
       time:
       - entity: time
+        type: from_entity
+      drinking:
+      - entity: drinking
+        type: from_entity
+  form_add_nutrition:
+    required_slots:
+      mass:
+      - entity: quantity
+        type: from_entity
+      time:
+      - entity: time
+        type: from_entity
+      nutrition:
+      - entity: nutrition
+        type: from_entity
+  form_add_medication:
+    required_slots:
+      mass:
+      - entity: quantity
+        type: from_entity
+      time:
+      - entity: time
+        type: from_entity
+      substance:
+      - entity: substance
         type: from_entity
   form_add_stress:
     required_slots:

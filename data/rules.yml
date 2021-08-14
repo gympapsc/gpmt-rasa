@@ -49,6 +49,7 @@ rules:
     - time: filled
   - slot_was_set:
     - amount: filled
+    - drinking: filled
   - slot_was_set:
     - amount: null
   - action: action_add_drinking
@@ -56,6 +57,7 @@ rules:
     - time: null
   - slot_was_set:
     - amount: null
+    - drinking: null
 - rule: Greet user
   condition:
   - slot_was_set:

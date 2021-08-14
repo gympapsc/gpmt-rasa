@@ -51,12 +51,14 @@ class ActionAddDrinking(Action):
     ):
         date = tracker.get_slot("time")
         amount = tracker.get_slot("amount")
+        drinking = tracker.get_slot("drinking")
         dispatcher.utter_message(json_message={
             "type": "ADD_DRINKING",
             "payload": {
                 "user": tracker.sender_id,
                 "date": date,
-                "amount": amount
+                "amount": amount,
+                "type": drinking
             }
         })
 

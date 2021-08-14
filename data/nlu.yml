@@ -57,11 +57,13 @@ nlu:
 - intent: add_drinking
   examples: |
     - Ich habe etwas getrunken
+    - Ich habe [Cola](drinking) getrunken
+    - Ich trank [Bier](drinking)
     - Trinkeintrag
-    - Wasser
-    - Kaffee
+    - [Wasser](drinking)
+    - [Kaffee](drinking)
     - Ich habe [](time) [](volume) Wasser getrunken
-    - [](volume) Wasser um [](time) getrunken
+    - [](volume) [Wasser](drinking) um [](time) getrunken
     - Ich habe das letzte mal [](time) Etwas getrunken
     - Ich habe ungefähr [](volume) getrunken
     - So etwa [](volume)
@@ -69,6 +71,7 @@ nlu:
     - [500](volume) milliliter
     - Ich habe [](time) [](volume) getrunken
     - [](time) habe ich [](volume) getrunken
+    - [800](volume) ml [Fanta](drinking) habe ich [gestern](time) getrunken
 - intent: fill_time
   examples: |
     - Gestern um [12 Uhr](time)
