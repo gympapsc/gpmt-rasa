@@ -36,12 +36,12 @@ class Store:
         logger.debug(list(curr_question["next"]))
 
         for n in curr_question["next"]:
-            question = self.mongodb["Questionnaire"].find_one({ "_id": ObjectId(n) })
+            question = self.mongodb["Questionnaire"].find_one({ "_id": ObjectId(n["_id"]) })
             
-            if len(list(question["condition"])) == 0:
+            if len(list(n["condition"])) == 0:
                 return question
 
-            for c in question["condition"]:
+            for c in n["condition"]:
                 if c["type"] == "true" and answer:
                     return question
                 if c["type"] == "false" and not answer:

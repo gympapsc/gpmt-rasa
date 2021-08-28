@@ -35,6 +35,10 @@ entities:
 - ms_timerange
 - drinking
 slots:
+  name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: ""
+    influence_conversation: false
   substance:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -203,11 +207,11 @@ slots:
     influence_conversation: false
 responses:
   utter_greet:
-  - text: Hallo, ich bin dein chatbot
+  - text: Hallo {name}, ich bin dein chatbot
   utter_questionnaire_start:
   - text: Ich möchte dir ein paar Fragen stellen.
   utter_did_that_help:
-  - text: Hilft dir das weiter?
+  - text: Hilft dir das weiter {name}?
   utter_goodbye:
   - text: Tschüss
   - text: Auf Wiedersehen
@@ -216,7 +220,7 @@ responses:
   utter_confirm:
   - text: Hab's eingetragen
   - text: Ist gespeichert
-  - text: Alles klar!
+  - text: Alles klar, {name}!
   utter_ask_form_add_micturition_time:
   - text: Wann warst du auf Toilette?
   utter_ask_form_add_drinking_time:
@@ -226,7 +230,7 @@ responses:
   - text: Wie viel hast du getrunken?
   utter_ask_form_add_nutrition_mass:
   - text: Und, wie viel?
-  - text: Wie viel hast du gegessen?
+  - text: Wie viel hast du gegessen, {name}?
   utter_ask_form_add_nutrition_nutrition:
   - text: Was hast du gegessen?
   utter_ask_form_add_nutrition_time:
