@@ -39,7 +39,7 @@ postgresql:
         size: "8Gi"
 
 rasa:
-    version: "2.6.0"
+    version: "2.8.0"
     additionalChannelCredentials:
         rest:
     versions:
