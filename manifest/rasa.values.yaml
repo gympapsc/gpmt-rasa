@@ -18,7 +18,7 @@ ingress:
         cert-manager.io/issuer: letsencrypt
 
 app:
-    name: "gpmtcontainerregistry.azurecr.io/gpmt-rasa-actions"
+    name: "hakrac/gpmt-rasa-actions"
     tag: "latest"
     extraEnvs:
     - name: "MONGO_URL"
