@@ -18,7 +18,7 @@ ingress:
         cert-manager.io/issuer: letsencrypt
 
 app:
-    name: "gpmtcontainerregistry.azurecr.io/gpmt-rasa-actions"
+    name: "hakrac/gpmt-rasa-actions"
     tag: "latest"
     extraEnvs:
     - name: "MONGO_URL"
@@ -31,22 +31,11 @@ rasax:
     initialUser:
         username: "gpmt"
         password: "gympap?password"
-    persistence:
-        size: "8Gi"
-    
-postgresql:
-    persistence:
-        size: "8Gi"
 
 rasa:
     version: "2.6.0"
     additionalChannelCredentials:
         rest:
-    versions:
-      rasaWorkers:
-          resources:
-              requests:
-                  memory: "1Gi"
 
 nginx:
     enabled: false
