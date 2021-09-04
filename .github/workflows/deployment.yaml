@@ -101,9 +101,8 @@ jobs:
 
       - name: Deploy nginx ingress
         run: |
-          helm upgrade ingress-rasa ingress-nginx/ingress-nginx \
-          --install \
-          --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }}
+          helm template ingress-rasa ingress-nginx/ingress-nginx \
+          --values ./manifest/nginx.values.yaml -n ${{ env.NAMESPACE }} | kubectl apply -f -
         
       - name: Deploy certificate manager
         run: |
@@ -121,5 +120,5 @@ jobs:
           --install \
           --namespace ${{ env.NAMESPACE }} \
           --values ./manifest/rasa.values.yaml
-          #--set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }}
+          # --set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }}
 

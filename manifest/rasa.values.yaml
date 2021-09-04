@@ -1,16 +1,12 @@
 ingress:
     hosts:
-    - host: rasax-gpmt.westeurope.cloudapp.azure.com
-      paths:
-      - /
     - host: rasa.gympapmt.de
       paths:
       - /
     
     tls:
     - secretName: rasa-x-tls
-      hosts:
-      - rasax-gpmt.westeurope.cloudapp.azure.com
+      hosts:    
       - rasa.gympapmt.de
 
     annotations:
@@ -23,14 +19,15 @@ app:
     extraEnvs:
     - name: "MONGO_URL"
       valueFrom:
-        secretKeyRef:
-           name: cosmosdb
-           key: url
+        scretKeyRef:
+          name: cosmos
+          key: url
 
 rasax:
     initialUser:
         username: "gpmt"
         password: "gympap?password"
+    tag: "0.40.0"
 
 rasa:
     version: "2.6.0"

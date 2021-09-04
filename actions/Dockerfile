@@ -1,4 +1,4 @@
-FROM rasa/rasa-sdk:latest
+FROM rasa/rasa-sdk:2.4.0
 
 WORKDIR /app/actions
 USER root

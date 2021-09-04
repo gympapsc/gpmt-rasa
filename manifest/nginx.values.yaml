@@ -14,7 +14,7 @@ controller:
 
     service:
         # aquired through azure public ip service
-        loadBalancerIP: "13.95.118.150"
+        loadBalancerIP: "20.105.182.1"
         annotations:
             service.beta.kubernetes.io/azure-dns-label-name: "rasax-gpmt"
 
