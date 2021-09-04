@@ -15,6 +15,7 @@ ingress:
 
 app:
     name: "gpmtcontainerregistry/gpmt-rasa-actions"
+    tag: "latest"
     extraEnvs:
     - name: "MONGO_URL"
       valueFrom:
