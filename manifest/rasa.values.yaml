@@ -19,7 +19,7 @@ app:
     extraEnvs:
     - name: "MONGO_URL"
       valueFrom:
-        scretKeyRef:
+        secretKeyRef:
           name: cosmos
           key: url
 
