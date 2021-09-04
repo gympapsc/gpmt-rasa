@@ -119,6 +119,6 @@ jobs:
           helm upgrade rasa-x rasa-x/rasa-x \
           --install \
           --namespace ${{ env.NAMESPACE }} \
-          --values ./manifest/rasa.values.yaml
+          --values ./manifest/rasa.values.yaml \
           --set images.imagePullSecrets[0].name=${{ env.REGISTRY_SECRET_NAME }}
 
