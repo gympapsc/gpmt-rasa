@@ -65,7 +65,8 @@ class ActionAddDrinking(Action):
         dispatcher.utter_message(response="utter_confirm")
         return [
             SlotSet(key="time"), 
-            SlotSet(key="amount")
+            SlotSet(key="amount"),
+            SlotSet(key="type")
         ]
 
 class ActionAddNutrition(Action):
