@@ -68,7 +68,6 @@ nlu:
     - Ich habe ungefähr [](volume) getrunken
     - So etwa [](volume)
     - [](volume)
-    - [500](volume) milliliter
     - Ich habe [](time) [](volume) getrunken
     - [](time) habe ich [](volume) getrunken
     - [800](volume) ml [Fanta](drinking) habe ich [gestern](time) getrunken
@@ -99,6 +98,7 @@ nlu:
     - Ich habe einen [Burger](nutrition) gegessen
     - Ich aß einen [Salat](nutrition)
     - Ich esse einen [Pfannkuchen](nutrition)
+    - [Wurst](nutrition)
 - regex: greet
   examples: |
     - H(.)*

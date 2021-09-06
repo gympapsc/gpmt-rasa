@@ -25,6 +25,8 @@ intents:
     use_entities: true
 - fill_drugs:
     use_entities: true
+- add_nutrition:
+    use_entities: true
 entities:
 - time
 - volume
@@ -34,10 +36,12 @@ entities:
 - drugs
 - ms_timerange
 - drinking
+- nutrition
 slots:
   name:
     type: rasa.shared.core.slots.TextSlot
-    initial_value: ""
+    initial_value: ''
+    auto_fill: true
     influence_conversation: false
   substance:
     type: rasa.shared.core.slots.TextSlot
@@ -303,6 +307,9 @@ responses:
   - text: Von welcher Form der Inkontienz bist du betroffen?
   utter_ask_form_questionnaire_micturition_diary:
   - text: Hast du schon einmal ein Miktionstagebuch geführt?
+  utter_ask_form_add_drinking_drinking:
+  - text: Was hast du getrunken?
+  - text: Und was hast du getrunken?
 actions:
 - action_add_micturition
 - action_add_drinking
@@ -324,33 +331,33 @@ forms:
       amount:
       - entity: volume
         type: from_entity
-      time:
-      - entity: time
-        type: from_entity
       drinking:
       - entity: drinking
+        type: from_entity
+      time:
+      - entity: time
         type: from_entity
   form_add_nutrition:
     required_slots:
       mass:
       - entity: quantity
         type: from_entity
-      time:
-      - entity: time
-        type: from_entity
       nutrition:
       - entity: nutrition
+        type: from_entity
+      time:
+      - entity: time
         type: from_entity
   form_add_medication:
     required_slots:
       mass:
       - entity: quantity
         type: from_entity
-      time:
-      - entity: time
-        type: from_entity
       substance:
       - entity: substance
+        type: from_entity
+      time:
+      - entity: time
         type: from_entity
   form_add_stress:
     required_slots:
