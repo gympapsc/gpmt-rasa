@@ -112,8 +112,6 @@ rules:
     - mass: filled
   - slot_was_set:
     - nutrition: filled
-  - slot_was_set:
-    - mass: null
   - action: action_add_nutrition
   - slot_was_set:
     - time: null
@@ -121,3 +119,10 @@ rules:
     - mass: null
   - slot_was_set:
     - nutrition: null
+- rule: Exit nutrition form
+  condition:
+  - active_loop: form_add_nutrition
+  steps:
+  - intent: deny
+  - action: action_deactivate_loop
+  - active_loop: null
