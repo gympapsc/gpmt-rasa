@@ -49,6 +49,7 @@ rules:
     - time: filled
   - slot_was_set:
     - amount: filled
+  - slot_was_set:
     - drinking: filled
   - slot_was_set:
     - amount: null
@@ -57,6 +58,7 @@ rules:
     - time: null
   - slot_was_set:
     - amount: null
+  - slot_was_set:
     - drinking: null
 - rule: Greet user
   condition:
@@ -93,3 +95,29 @@ rules:
   - intent: goodbye
   - action: utter_goodbye
   - action: action_signout
+- rule: Add nutrition entry
+  condition:
+  - slot_was_set:
+    - questionnaire: false
+  steps:
+  - intent: add_nutrition
+  - action: form_add_nutrition
+  - active_loop: form_add_nutrition
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - time: filled
+  - slot_was_set:
+    - mass: filled
+  - slot_was_set:
+    - nutrition: filled
+  - slot_was_set:
+    - mass: null
+  - action: action_add_nutrition
+  - slot_was_set:
+    - time: null
+  - slot_was_set:
+    - mass: null
+  - slot_was_set:
+    - nutrition: null

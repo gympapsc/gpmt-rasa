@@ -70,7 +70,7 @@ nlu:
     - [](volume)
     - Ich habe [](time) [](volume) getrunken
     - [](time) habe ich [](volume) getrunken
-    - [800](volume) ml [Fanta](drinking) habe ich [gestern](time) getrunken
+    - [](volume) Fanta habe ich gestern getrunken
 - intent: fill_time
   examples: |
     - Gestern um [12 Uhr](time)
