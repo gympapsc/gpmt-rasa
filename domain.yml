@@ -335,6 +335,10 @@ responses:
   utter_ask_form_add_drinking_drinking:
   - text: Was hast du getrunken?
   - text: Und was hast du getrunken?
+  utter_ask_form_update_height_height:
+  - text: Wie groß bist du?
+  utter_ask_form_update_weight_weight:
+  - text: Wie viel wiegst du?
 actions:
 - action_add_micturition
 - action_add_drinking
