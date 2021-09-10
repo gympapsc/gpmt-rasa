@@ -177,6 +177,32 @@ class ActionInit(Action):
             SlotSet(key="name", value=name)
         ]
 
+class ActionUpdateHeight(Action):
+
+    def name(self):
+        return "action_update_height"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        height = tracker.get_slot("height")
+
+        dispatcher.utter_message(json_message={
+            "type": "UPDATE_USER",
+            "payload": {
+                "height": height
+            }
+        })
+        dispatcher.utter_message(response="utter_confirm")
+
+        return [
+            SlotSet(key="height")
+        ]
+
+
 class ActionSignOut(Action):
 
     def name(self):
