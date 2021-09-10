@@ -40,6 +40,7 @@ nlu:
     - ich lehne das ab
     - auf keinen fall
     - nicht wirklich
+    - Nein
 - intent: add_micturition
   examples: |
     - Ich war auf Toilette
@@ -99,6 +100,7 @@ nlu:
     - Ich aß einen [Salat](nutrition)
     - Ich esse einen [Pfannkuchen](nutrition)
     - [Wurst](nutrition)
+    - Ich habe ein Brot gegessen
 - regex: greet
   examples: |
     - H(.)*
