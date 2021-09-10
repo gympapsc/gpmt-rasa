@@ -126,3 +126,19 @@ rules:
   - intent: deny
   - action: action_deactivate_loop
   - active_loop: null
+- rule: Update body height
+  condition:
+  - slot_was_set:
+    - questionnaire: false
+  steps:
+  - intent: update_height
+  - action: form_update_height
+  - active_loop: form_update_height
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - height: filled
+  - action: action_update_height
+  - slot_was_set:
+    - height: null
