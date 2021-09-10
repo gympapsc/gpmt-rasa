@@ -106,6 +106,9 @@ nlu:
   examples: |
     - Ich bin gewachsen
     - Ich bin [](distance) groß
+- intent: update_weight
+  examples: |
+    - Ich wiege [](number) kg
 - regex: greet
   examples: |
     - H(.)*

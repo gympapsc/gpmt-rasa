@@ -142,3 +142,19 @@ rules:
   - action: action_update_height
   - slot_was_set:
     - height: null
+- rule: Update body weight
+  condition:
+  - slot_was_set:
+    - questionnaire: false
+  steps:
+  - intent: update_weight
+  - action: form_update_weight
+  - active_loop: form_update_weight
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - weight: filled
+  - action: action_update_weight
+  - slot_was_set:
+    - weight: null

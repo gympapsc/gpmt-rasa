@@ -29,6 +29,8 @@ intents:
     use_entities: true
 - update_height:
     use_entities: true
+- update_weight:
+    use_entities: true
 entities:
 - time
 - volume
@@ -225,6 +227,13 @@ slots:
     influence_conversation: false
     max_value: 1.0
     min_value: 0.0
+  weight:
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
 responses:
   utter_greet:
   - text: Hallo {name}, ich bin dein chatbot
@@ -338,7 +347,13 @@ actions:
 - action_signout
 - form_update_height
 - action_update_height
+- action_update_weight
 forms:
+  form_update_weight:
+    required_slots:
+      weight:
+      - entity: quantity
+        type: from_entity
   form_update_height:
     required_slots:
       height:
