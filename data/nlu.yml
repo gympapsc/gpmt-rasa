@@ -100,7 +100,12 @@ nlu:
     - Ich aß einen [Salat](nutrition)
     - Ich esse einen [Pfannkuchen](nutrition)
     - [Wurst](nutrition)
-    - Ich habe ein Brot gegessen
+    - Ich habe ein [Brot](nutrition) gegessen
+    - Ich habe zwei [Bröttchen](nutrition) gegesssen
+- intent: update_height
+  examples: |
+    - Ich bin gewachsen
+    - Ich bin [](distance) groß
 - regex: greet
   examples: |
     - H(.)*
