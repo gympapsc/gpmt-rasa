@@ -202,6 +202,30 @@ class ActionUpdateHeight(Action):
             SlotSet(key="height")
         ]
 
+class ActionUpdateWeight(Action):
+
+    def name(self):
+        return "action_update_weight"
+    
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]
+    ):
+        weight = tracker.get_slot("weight")
+
+        dispatcher.utter_message(json_message={
+            "type": "UPDATE_USER",
+            "payload": {
+                "weight": weight
+            }
+        })
+        dispatcher.utter_message(response="utter_confirm")
+
+        return [
+            SlotSet(key="weight")
+        ]
 
 class ActionSignOut(Action):
 
