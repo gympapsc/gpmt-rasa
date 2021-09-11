@@ -24,7 +24,7 @@ services:
         ports:
             - "5055:5055"
         environment:
-            - MONGO_URL=mongodb://gpmt-mongo:27017/gpmt
+            - MONGO_URL=mongodb://gpmt-mongo:27017
 
 networks:
     gpmt-default:
