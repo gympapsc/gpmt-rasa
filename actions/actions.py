@@ -66,7 +66,7 @@ class ActionAddDrinking(Action):
         return [
             SlotSet(key="time"), 
             SlotSet(key="amount"),
-            SlotSet(key="type")
+            SlotSet(key="drinking")
         ]
 
 class ActionAddNutrition(Action):
