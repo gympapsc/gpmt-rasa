@@ -17,13 +17,7 @@ intents:
     use_entities: true
 - add_drinking:
     use_entities: true
-- fill_time:
-    use_entities: true
 - fill_stress:
-    use_entities: true
-- fill_health_apps:
-    use_entities: true
-- fill_drugs:
     use_entities: true
 - add_nutrition:
     use_entities: true
@@ -36,9 +30,6 @@ entities:
 - volume
 - quantity
 - stresslevel
-- health_apps
-- drugs
-- ms_timerange
 - drinking
 - distance
 - nutrition
@@ -111,13 +102,6 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
-  health_apps:
-    type: rasa.shared.core.slots.FloatSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-    max_value: 10.0
-    min_value: 0.0
   questionnaire:
     type: rasa.shared.core.slots.BooleanSlot
     initial_value: true
@@ -136,16 +120,6 @@ slots:
     auto_fill: true
     influence_conversation: false
   incontinence_severity:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  drugs:
-    type: rasa.shared.core.slots.ListSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  micturition_diary:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -421,9 +395,6 @@ forms:
         type: from_entity
       fitness_tracker:
       - type: from_text
-      health_apps:
-      - entity: health_apps
-        type: from_entity
       incontinence:
       - type: from_text
       incontinence_severity:
@@ -449,8 +420,7 @@ forms:
       ms_speech:
       - type: from_text
       ms_timerange:
-      - entity: ms_timerange
-        type: from_entity
+      - type: from_text
       ms_type:
       - type: from_text
       ms_vision:

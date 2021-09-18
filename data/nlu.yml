@@ -71,14 +71,7 @@ nlu:
     - [](volume)
     - Ich habe [](time) [](volume) getrunken
     - [](time) habe ich [](volume) getrunken
-    - [](volume) Fanta habe ich gestern getrunken
-- intent: fill_time
-  examples: |
-    - Gestern um [12 Uhr](time)
-    - So gegen [](time)
-    - [](time)
-    - Seit [2](ms_timerange) Jahren
-    - Ich leide seit [4](ms_timerange) Jahren unter MS
+    - [](volume) Fanta habe ich [](time) getrunken
 - intent: fill_stress
   examples: |
     - Ich fühle [wohl](stresslevel)
@@ -86,14 +79,6 @@ nlu:
     - Ich fühle mich [sehr gut](stresslevel)
     - Ich fühle mich [schlecht](stresslevel)
     - Ich bin [gestresst](stresslevel)
-- intent: fill_health_apps
-  examples: |
-    - Ich nutze [3](health_apps) Gesundheitsapps
-    - Ich nutze [keine](health_apps) Gesundheitsapps
-    - Ich benutze [0](health_apps) Gesundheitsapps
-- intent: fill_drugs
-  examples: |
-    - Ich nehme regelmäßig [Kortison](drugs) ein
 - intent: add_nutrition
   examples: |
     - Ich habe einen [Burger](nutrition) gegessen
@@ -109,6 +94,3 @@ nlu:
 - intent: update_weight
   examples: |
     - Ich wiege [](number) kg
-- regex: greet
-  examples: |
-    - H(.)*
