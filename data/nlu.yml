@@ -55,16 +55,16 @@ nlu:
     - Ich war [gerade](time) auf dem Pot
     - Ich war um [12 Uhr](time) auf Toilette
     - Um [](time) war meine Miktion
-- intent: add_drinking
+- intent: add_hydration
   examples: |
     - Ich habe etwas getrunken
-    - Ich habe [Cola](drinking) getrunken
-    - Ich trank [Bier](drinking)
+    - Ich habe [Cola](hydration) getrunken
+    - Ich trank [Bier](hydration)
     - Trinkeintrag
-    - [Wasser](drinking)
-    - [Kaffee](drinking)
+    - [Wasser](hydration)
+    - [Kaffee](hydration)
     - Ich habe [](time) [](volume) Wasser getrunken
-    - [](volume) [Wasser](drinking) um [](time) getrunken
+    - [](volume) [Wasser](hydration) um [](time) getrunken
     - Ich habe das letzte mal [](time) Etwas getrunken
     - Ich habe ungefähr [](volume) getrunken
     - So etwa [](volume)

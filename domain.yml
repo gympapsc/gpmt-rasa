@@ -15,7 +15,7 @@ intents:
     use_entities: true
 - affirm:
     use_entities: true
-- add_drinking:
+- add_hydration:
     use_entities: true
 - fill_stress:
     use_entities: true
@@ -30,7 +30,7 @@ entities:
 - volume
 - quantity
 - stresslevel
-- drinking
+- hydration
 - distance
 - nutrition
 - number
@@ -77,7 +77,7 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
-  drinking:
+  hydration:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -226,9 +226,9 @@ responses:
   - text: Alles klar, {name}!
   utter_ask_form_add_micturition_time:
   - text: Wann warst du auf Toilette?
-  utter_ask_form_add_drinking_time:
+  utter_ask_form_add_hydration_time:
   - text: Wann genau hast du Etwas getrunken?
-  utter_ask_form_add_drinking_amount:
+  utter_ask_form_add_hydration_amount:
   - text: Und wie viel?
   - text: Wie viel hast du getrunken?
   utter_ask_form_add_nutrition_mass:
@@ -306,7 +306,7 @@ responses:
   - text: Von welcher Form der Inkontienz bist du betroffen?
   utter_ask_form_questionnaire_micturition_diary:
   - text: Hast du schon einmal ein Miktionstagebuch geführt?
-  utter_ask_form_add_drinking_drinking:
+  utter_ask_form_add_hydration_hydration:
   - text: Was hast du getrunken?
   - text: Und was hast du getrunken?
   utter_ask_form_update_height_height:
@@ -315,7 +315,7 @@ responses:
   - text: Wie viel wiegst du?
 actions:
 - action_add_micturition
-- action_add_drinking
+- action_add_hydration
 - action_add_stress
 - validate_form_questionnaire
 - action_exit_questionnaire
@@ -342,13 +342,13 @@ forms:
       time:
       - entity: time
         type: from_entity
-  form_add_drinking:
+  form_add_hydration:
     required_slots:
       amount:
       - entity: volume
         type: from_entity
-      drinking:
-      - entity: drinking
+      hydration:
+      - entity: hydration
         type: from_entity
       time:
       - entity: time

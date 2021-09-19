@@ -8,11 +8,11 @@ stories:
   - intent: deny
   - action: action_deactivate_loop
   - active_loop: null
-- story: Exit drinking form
+- story: Exit hydration form
   steps:
-  - intent: add_drinking
-  - action: form_add_drinking
-  - active_loop: form_add_drinking
+  - intent: add_hydration
+  - action: form_add_hydration
+  - active_loop: form_add_hydration
   - intent: deny
   - action: action_deactivate_loop
   - active_loop: null

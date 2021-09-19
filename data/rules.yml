@@ -34,14 +34,14 @@ rules:
   - action: action_add_micturition
   - slot_was_set:
     - time: null
-- rule: Add drinking entry
+- rule: Add hydration entry
   condition:
   - slot_was_set:
     - questionnaire: false
   steps:
-  - intent: add_drinking
-  - action: form_add_drinking
-  - active_loop: form_add_drinking
+  - intent: add_hydration
+  - action: form_add_hydration
+  - active_loop: form_add_hydration
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
@@ -50,16 +50,16 @@ rules:
   - slot_was_set:
     - amount: filled
   - slot_was_set:
-    - drinking: filled
+    - hydration: filled
   - slot_was_set:
     - amount: null
-  - action: action_add_drinking
+  - action: action_add_hydration
   - slot_was_set:
     - time: null
   - slot_was_set:
     - amount: null
   - slot_was_set:
-    - drinking: null
+    - hydration: null
 - rule: Greet user
   condition:
   - slot_was_set:

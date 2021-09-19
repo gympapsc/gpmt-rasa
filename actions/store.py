@@ -21,7 +21,7 @@ class Store:
         })
         return entry
 
-    def get_drinking(self, userid):
+    def get_hydration(self, userid):
         entry = self.mongodb["Micturition"].find({
             "user": ObjectId(userid)
         })
@@ -65,11 +65,11 @@ class Store:
     # def edit_micturition(self, userid="", id):
     #     pass
 
-    # def edit_drinking(self, userid=""):
+    # def edit_hydration(self, userid=""):
     #     pass
 
     # def delete_micturition(self, userid="", mictid=""):
     #     pass
 
-    # def delete_drinking(self, userid="", drinkid=""):
+    # def delete_hydration(self, userid="", drinkid=""):
     #     pass

@@ -38,10 +38,10 @@ class ActionAddMicturition(Action):
         dispatcher.utter_message(response="utter_confirm")
         return [SlotSet(key="time")]
 
-class ActionAddDrinking(Action):
+class ActionAddHydration(Action):
 
     def name(self):
-        return "action_add_drinking"
+        return "action_add_hydration"
     
     def run(
         self,
@@ -51,14 +51,14 @@ class ActionAddDrinking(Action):
     ):
         date = tracker.get_slot("time")
         amount = tracker.get_slot("amount")
-        drinking = tracker.get_slot("drinking")
+        hydration = tracker.get_slot("hydration")
         dispatcher.utter_message(json_message={
-            "type": "ADD_DRINKING",
+            "type": "ADD_hydration",
             "payload": {
                 "user": tracker.sender_id,
                 "date": date,
                 "amount": amount,
-                "type": drinking
+                "type": hydration
             }
         })
 
@@ -66,7 +66,7 @@ class ActionAddDrinking(Action):
         return [
             SlotSet(key="time"), 
             SlotSet(key="amount"),
-            SlotSet(key="drinking")
+            SlotSet(key="hydration")
         ]
 
 class ActionAddNutrition(Action):
