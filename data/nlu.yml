@@ -68,10 +68,12 @@ nlu:
     - Ich habe das letzte mal [](time) Etwas getrunken
     - Ich habe ungefähr [](volume) getrunken
     - So etwa [](volume)
-    - [](volume)
     - Ich habe [](time) [](volume) getrunken
     - [](time) habe ich [](volume) getrunken
     - [](volume) Fanta habe ich [](time) getrunken
+    - [](time)
+    - [](volume)
+    - [Sprite](hydration)
 - intent: fill_stress
   examples: |
     - Ich fühle [wohl](stresslevel)

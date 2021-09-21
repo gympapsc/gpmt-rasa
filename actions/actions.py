@@ -53,7 +53,7 @@ class ActionAddHydration(Action):
         amount = tracker.get_slot("amount")
         hydration = tracker.get_slot("hydration")
         dispatcher.utter_message(json_message={
-            "type": "ADD_hydration",
+            "type": "ADD_HYDRATION",
             "payload": {
                 "user": tracker.sender_id,
                 "date": date,

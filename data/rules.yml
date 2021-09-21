@@ -47,18 +47,12 @@ rules:
     - requested_slot: null
   - slot_was_set:
     - time: filled
-  - slot_was_set:
     - amount: filled
-  - slot_was_set:
     - hydration: filled
-  - slot_was_set:
-    - amount: null
   - action: action_add_hydration
   - slot_was_set:
     - time: null
-  - slot_was_set:
     - amount: null
-  - slot_was_set:
     - hydration: null
 - rule: Greet user
   condition:
