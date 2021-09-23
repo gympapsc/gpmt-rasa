@@ -55,13 +55,11 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
-  amount:
+  volume:
     type: rasa.shared.core.slots.FloatSlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
-    max_value: 1.0
-    min_value: 0.0
   disease:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
@@ -228,7 +226,7 @@ responses:
   - text: Wann warst du auf Toilette?
   utter_ask_form_add_hydration_time:
   - text: Wann genau hast du Etwas getrunken?
-  utter_ask_form_add_hydration_amount:
+  utter_ask_form_add_hydration_volume:
   - text: Und wie viel?
   - text: Wie viel hast du getrunken?
   utter_ask_form_add_nutrition_mass:
@@ -347,7 +345,7 @@ forms:
       time:
       - entity: time
         type: from_entity
-      amount:
+      volume:
       - entity: volume
         type: from_entity
       hydration:

@@ -50,7 +50,7 @@ class ActionAddHydration(Action):
         domain: Dict[Text, Any]
     ):
         date = tracker.get_slot("time")
-        amount = tracker.get_slot("amount")
+        amount = tracker.get_slot("volume")
         hydration = tracker.get_slot("hydration")
         dispatcher.utter_message(json_message={
             "type": "ADD_HYDRATION",
@@ -65,7 +65,7 @@ class ActionAddHydration(Action):
         dispatcher.utter_message(response="utter_confirm")
         return [
             SlotSet(key="time"), 
-            SlotSet(key="amount"),
+            SlotSet(key="volume"),
             SlotSet(key="hydration")
         ]
 

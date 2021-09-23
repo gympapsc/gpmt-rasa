@@ -53,7 +53,7 @@ nlu:
     - Ich war pissen
     - Ich war auf dem Pot
     - Ich war [gerade](time) auf dem Pot
-    - Ich war um [12 Uhr](time) auf Toilette
+    - Ich war um [](time) auf Toilette
     - Um [](time) war meine Miktion
 - intent: add_hydration
   examples: |
