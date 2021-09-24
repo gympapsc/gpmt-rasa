@@ -353,14 +353,14 @@ forms:
         type: from_entity
   form_add_nutrition:
     required_slots:
+      time:
+      - entity: time
+        type: from_entity
       mass:
       - entity: quantity
         type: from_entity
       nutrition:
       - entity: nutrition
-        type: from_entity
-      time:
-      - entity: time
         type: from_entity
   form_add_medication:
     required_slots:

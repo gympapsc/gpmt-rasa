@@ -10,7 +10,7 @@ services:
         ports:
             - "5005:5005"
     duckling:
-        image: rasa/duckling:latest
+        image: hakrac/duckling
         networks:
             - gpmt-default
         ports:

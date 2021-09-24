@@ -102,16 +102,12 @@ rules:
     - requested_slot: null
   - slot_was_set:
     - time: filled
-  - slot_was_set:
     - mass: filled
-  - slot_was_set:
     - nutrition: filled
   - action: action_add_nutrition
   - slot_was_set:
     - time: null
-  - slot_was_set:
     - mass: null
-  - slot_was_set:
     - nutrition: null
 - rule: Exit nutrition form
   condition:
