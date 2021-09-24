@@ -66,19 +66,15 @@ rules:
   - slot_was_set:
     - questionnaire: false
   steps:
-  - intent: fill_stress
+  - intent: add_stress
   - action: form_add_stress
   - active_loop: form_add_stress
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
   - slot_was_set:
-    - time: filled
-  - slot_was_set:
     - stresslevel: filled
   - action: action_add_stress
-  - slot_was_set:
-    - time: null
   - slot_was_set:
     - stresslevel: null
 - rule: Sign Out

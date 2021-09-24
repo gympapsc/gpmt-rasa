@@ -74,7 +74,7 @@ nlu:
     - [](time)
     - [](volume)
     - [Sprite](hydration)
-- intent: fill_stress
+- intent: add_stress
   examples: |
     - Ich fühle [wohl](stresslevel)
     - Ich fühle mich [gut](stresslevel)

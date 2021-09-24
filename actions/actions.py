@@ -156,7 +156,6 @@ class ActionAddStress(Action):
 
         dispatcher.utter_message(response="utter_confirm")
         return [
-            SlotSet(key="time"),
             SlotSet(key="stresslevel")
         ]
 

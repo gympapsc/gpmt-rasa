@@ -208,7 +208,8 @@ slots:
     min_value: 0.0
 responses:
   utter_greet:
-  - text: Hallo {name}, ich bin dein chatbot
+  - text: Hallo {name}, ich bin Klara.
+  - text: Hi {name}, ich heiße Klara.
   utter_questionnaire_start:
   - text: Ich möchte dir ein paar Fragen stellen.
   utter_did_that_help:
@@ -217,10 +218,11 @@ responses:
   - text: Tschüss
   - text: Auf Wiedersehen
   utter_iamabot:
-  - text: Ich bin deine Hilfe
+  - text: Ich bin Klara. Wie geht es dir?
+  - text: Ich heiße Klara.
   utter_confirm:
-  - text: Hab's eingetragen
-  - text: Ist gespeichert
+  - text: Hab's eingetragen!
+  - text: Ist gespeichert!
   - text: Alles klar, {name}!
   utter_ask_form_add_micturition_time:
   - text: Wann warst du auf Toilette?
@@ -228,9 +230,9 @@ responses:
   - text: Wann genau hast du Etwas getrunken?
   utter_ask_form_add_hydration_volume:
   - text: Und wie viel?
-  - text: Wie viel hast du getrunken?
+  - text: Wie viel {hydration} hast du getrunken?
   utter_ask_form_add_nutrition_mass:
-  - text: Und, wie viel?
+  - text: Und, wie viel {nutrition} hast du gegessen?
   - text: Wie viel hast du gegessen, {name}?
   utter_ask_form_add_nutrition_nutrition:
   - text: Was hast du gegessen?
@@ -239,11 +241,10 @@ responses:
   utter_ask_form_questionnaire_disease:
   - text: Leidest du unter Multipler Sklerose?
   utter_questionnaire_finished:
-  - text: Das war's! Wenn du auf Toilette warst oder etwas getrunken hast, kannst du mir das einfach sagen.
+  - text: Alles klar! Sag mir bescheid wenn du auf Toilette warst oder etwas getrunken oder gegessen hast.
   utter_ask_form_add_stress_stresslevel:
   - text: Auf einer Skala von 1 bis 5 wie fühlst du dich?
-  utter_ask_form_add_stress_time:
-  - text: Und wann?
+
   utter_ask_form_questionnaire_incontinence:
   - text: Leidest du unter Inkontinenz?
   - text: Bist du von Inkontinenz betroffen?
@@ -291,19 +292,10 @@ responses:
   - text: Fühlst du dich im Alltag oft übermäßig erschöpft?
   utter_ask_form_questionnaire_concentration_disorder:
   - text: Leidest du dadurch oft unter Konzentrationsschwierigkeit?
-  utter_ask_form_questionnaire_work:
-  - text: Wie viel arbeitest du oder gehst du zur Schule?
-  utter_ask_form_questionnaire_work_incontinence:
-  - text: Schränkt dich deine Inkontinenz im Alltag ein?
-  utter_ask_form_questionnaire_work_fatigue:
-  - text: Fühlst du dich durch deine Müdigkeit im Alltag eingeschränkt?
-  utter_ask_form_questionnaire_drugs:
-  - text: Welche Mediakmente nimmst du ein?
   utter_ask_form_questionnaire_incontinence_severity:
   - text: Unter welcher Form der Inkontinenz leidest du?
   - text: Von welcher Form der Inkontienz bist du betroffen?
-  utter_ask_form_questionnaire_micturition_diary:
-  - text: Hast du schon einmal ein Miktionstagebuch geführt?
+
   utter_ask_form_add_hydration_hydration:
   - text: Was hast du getrunken?
   - text: Und was hast du getrunken?
@@ -311,6 +303,10 @@ responses:
   - text: Wie groß bist du?
   utter_ask_form_update_weight_weight:
   - text: Wie viel wiegst du?
+  utter_default:
+  - text: Wie meinst du das, {name}?
+  - text: Ich verstehe dich nicht, {name}. Kannst du dich anders ausdrücken?
+  - text: Ich bin mir nicht sicher, was du meinst.
 actions:
 - action_add_micturition
 - action_add_hydration
@@ -345,22 +341,22 @@ forms:
       time:
       - entity: time
         type: from_entity
-      volume:
-      - entity: volume
-        type: from_entity
       hydration:
       - entity: hydration
+        type: from_entity
+      volume:
+      - entity: volume
         type: from_entity
   form_add_nutrition:
     required_slots:
       time:
       - entity: time
         type: from_entity
-      mass:
-      - entity: quantity
-        type: from_entity
       nutrition:
       - entity: nutrition
+        type: from_entity
+      mass:
+      - entity: quantity
         type: from_entity
   form_add_medication:
     required_slots:
@@ -376,7 +372,7 @@ forms:
   form_add_stress:
     required_slots:
       stresslevel:
-      - entity: stresslevel
+      - entity: number
         type: from_entity
   form_questionnaire:
     required_slots:
@@ -422,11 +418,5 @@ forms:
       ms_type:
       - type: from_text
       ms_vision:
-      - type: from_text
-      work:
-      - type: from_text
-      work_fatigue:
-      - type: from_text
-      work_incontinence:
       - type: from_text
 e2e_actions: []
